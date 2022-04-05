@@ -1,0 +1,11 @@
+services:
+  service-db:
+    image: postgres:11.15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./infrastructure/db:/docker-entrypoint-initdb.d
+    restart: unless-stopped
