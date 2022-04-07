@@ -8,4 +8,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
+  application:
+    name: airline-service
+server:
+  port: 8080

@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 2022-04-05--01-capitan-create-table
+      id: 2022-04-05--01-captain-create-table
       author: yahor
       changes:
         - createTable:
-            tableName: capitan
+            tableName: captain
             columns:
               - column:
                   name: id
@@ -12,7 +12,7 @@ databaseChangeLog:
                   autoIncrement: true
                   constraints:
                     primaryKey: true
-                    primaryKeyName: capitan_id
+                    primaryKeyName: captain_id
                     nullable: false
               - column:
                   name: name
@@ -134,6 +134,11 @@ databaseChangeLog:
                   type: varchar(50)
                   constraints:
                     nullable: false
+              - column:
+                  name: flying_wind_speed
+                  type: float
+                  constraints:
+                    nullable: false
   - changeSet:
       id: 2022-04-05--06-airplane-create-table
       author: yahor
@@ -182,19 +187,19 @@ databaseChangeLog:
                     primaryKeyName: equipage_id
                     nullable: false
               - column:
-                  name: capitan_id
+                  name: captain_id
                   type: bigint
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_capitan_id
-                    references: capitan(id)
+                    foreignKeyName: fk_captain_id
+                    references: captain(id)
               - column:
                   name: second_pilot_id
                   type: bigint
                   constraints:
-                   nullable: false
-                   foreignKeyName: fk_second_pilot_id
-                   references: second_pilot(id)
+                    nullable: false
+                    foreignKeyName: fk_second_pilot_id
+                    references: second_pilot(id)
               - column:
                   name: stewardess_id
                   type: bigint
@@ -209,9 +214,75 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_engineer_id
                     references: engineer(id)
-
   - changeSet:
-      id: 2022-04-05--08-flight-create-table
+      id: 2022-04-05--08-role-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: role_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2022-04-05--09-user-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_id
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_role_id
+                    references: role(id)
+  - changeSet:
+      id: 2022-04-07--10-city-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: city
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: city_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2022-04-07--11-flight-create-table
       author: yahor
       changes:
         - createTable:
@@ -226,10 +297,19 @@ databaseChangeLog:
                     primaryKeyName: flight_id
                     nullable: false
               - column:
-                  name: arrival airport
-                  type: varchar(50)
+                  name: departure_city_id
+                  type: bigint
                   constraints:
                     nullable: false
+                    foreignKeyName: fk_departure_city_id
+                    references: city(id)
+              - column:
+                  name: arrival_city_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_arrival_city_id
+                    references: city(id)
               - column:
                   name: plane_id
                   type: bigint
