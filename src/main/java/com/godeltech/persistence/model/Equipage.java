@@ -19,8 +19,8 @@ public class Equipage {
     private Engineer engineer;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "capitan_id")
-    private Capitan capitan;
+    @JoinColumn(name = "captain_id")
+    private Captain captain;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "second_pilot_id")

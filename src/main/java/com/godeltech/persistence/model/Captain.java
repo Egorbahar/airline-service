@@ -10,8 +10,8 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-@Table(name = "capitan")
-public class Capitan {
+@Table(name = "captain")
+public class Captain {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -26,7 +26,7 @@ public class Capitan {
     @Column(name = "rank", nullable = false, length = 50)
     private String rank;
 
-    @OneToMany(mappedBy = "capitan")
+    @OneToMany(mappedBy = "captain")
     private Set<Equipage> equipages = new LinkedHashSet<>();
 
 }

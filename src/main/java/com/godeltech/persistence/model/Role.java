@@ -4,18 +4,23 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@Table(name = "category")
-public class Category {
+@Table(name = "role")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
-    @Column(name = "name", nullable = false)
+
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
-    @Column(name = "flying_wind_speed", nullable = false)
-    private Float flyingWindSpeed;
+
+    @OneToMany(mappedBy = "role")
+    private Set<User> users = new LinkedHashSet<>();
+
 }
