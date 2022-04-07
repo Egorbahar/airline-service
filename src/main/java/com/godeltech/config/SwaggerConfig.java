@@ -13,11 +13,11 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .info(
                         new Info()
-                                .title("Service")
+                                .title("Airline service")
                                 .version("1.0.0")
                                 .contact(
                                         new Contact()
-                                                .email("egorbahar@gmail.com")
+                                                .email("y.bakhar@godeltech.com")
                                                 .name("Bakhar Yahor")
                                 )
                 );
