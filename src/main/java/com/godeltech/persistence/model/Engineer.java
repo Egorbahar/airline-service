@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -25,8 +23,5 @@ public class Engineer {
 
     @Column(name = "speciality", length = 50)
     private String speciality;
-
-    @OneToMany(mappedBy = "engineer")
-    private Set<Equipage> equipages = new LinkedHashSet<>();
 
 }

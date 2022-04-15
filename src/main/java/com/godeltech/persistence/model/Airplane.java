@@ -4,8 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -20,14 +18,11 @@ public class Airplane {
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
-    @Column(name = "passegers_number", nullable = false)
-    private Integer passegersNumber;
+    @Column(name = "wind_speed", nullable = false)
+    private Double windSpeed;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-
-    @OneToMany(mappedBy = "plane")
-    private Set<Flight> flights = new LinkedHashSet<>();
 
 }
