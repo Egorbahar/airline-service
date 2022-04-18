@@ -14,12 +14,12 @@ public class SecondPilotServiceImpl implements SecondPilotService {
     private final SecondPilotRepository secondPilotRepository;
 
     @Override
-    public SecondPilot findById(Long id) {
+    public SecondPilot findById(final Long id) {
         return secondPilotRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public SecondPilot save(SecondPilot secondPilot) {
+    public SecondPilot save(final SecondPilot secondPilot) {
         return secondPilotRepository.save(secondPilot);
     }
 
@@ -29,12 +29,12 @@ public class SecondPilotServiceImpl implements SecondPilotService {
     }
 
     @Override
-    public SecondPilot update(SecondPilot secondPilot) {
+    public SecondPilot update(final SecondPilot secondPilot) {
         return secondPilotRepository.saveAndFlush(secondPilot);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         secondPilotRepository.deleteById(id);
     }
 }

@@ -18,7 +18,7 @@ public class SecondPilotFacadeImpl implements SecondPilotFacade {
     private final SecondPilotMapper secondPilotMapper;
 
     @Override
-    public SecondPilotResponseDto findById(Long id) {
+    public SecondPilotResponseDto findById(final Long id) {
         return secondPilotMapper.toSecondPilotResponseDto(secondPilotService.findById(id));
     }
 
@@ -28,19 +28,19 @@ public class SecondPilotFacadeImpl implements SecondPilotFacade {
     }
 
     @Override
-    public SecondPilotResponseDto save(SecondPilotRequestDto secondPilotRequestDto) {
+    public SecondPilotResponseDto save(final SecondPilotRequestDto secondPilotRequestDto) {
         return secondPilotMapper.toSecondPilotResponseDto(secondPilotService.save(secondPilotMapper.toSecondPilot(secondPilotRequestDto)));
     }
 
     @Override
-    public SecondPilotResponseDto update(Long id, SecondPilotRequestDto secondPilotRequestDto) {
+    public SecondPilotResponseDto update(final Long id, final SecondPilotRequestDto secondPilotRequestDto) {
         SecondPilot secondPilot = secondPilotService.findById(id);
         secondPilotMapper.updateEntity(secondPilot, secondPilotRequestDto);
         return secondPilotMapper.toSecondPilotResponseDto(secondPilotService.update(secondPilot));
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         secondPilotService.deleteById(id);
     }
 }

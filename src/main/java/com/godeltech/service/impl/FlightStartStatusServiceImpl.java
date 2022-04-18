@@ -14,12 +14,12 @@ public class FlightStartStatusServiceImpl implements FlightStartStatusService {
     private final FlightStartStatusRepository flightStartStatusRepository;
 
     @Override
-    public FlightStartStatus findById(Long id) {
+    public FlightStartStatus findById(final Long id) {
         return flightStartStatusRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public FlightStartStatus save(FlightStartStatus flightStartStatus) {
+    public FlightStartStatus save(final FlightStartStatus flightStartStatus) {
         return flightStartStatusRepository.save(flightStartStatus);
     }
 
@@ -29,12 +29,12 @@ public class FlightStartStatusServiceImpl implements FlightStartStatusService {
     }
 
     @Override
-    public FlightStartStatus update(FlightStartStatus flightStartStatus) {
+    public FlightStartStatus update(final FlightStartStatus flightStartStatus) {
         return flightStartStatusRepository.saveAndFlush(flightStartStatus);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         flightStartStatusRepository.deleteById(id);
     }
 }

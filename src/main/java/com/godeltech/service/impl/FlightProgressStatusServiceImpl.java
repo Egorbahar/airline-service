@@ -14,12 +14,12 @@ public class FlightProgressStatusServiceImpl implements FlightProgressStatusServ
     private final FlightProgressStatusRepository flightProgressStatusRepository;
 
     @Override
-    public FlightProgressStatus findById(Long id) {
+    public FlightProgressStatus findById(final Long id) {
         return flightProgressStatusRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public FlightProgressStatus save(FlightProgressStatus flightProgressStatus) {
+    public FlightProgressStatus save(final FlightProgressStatus flightProgressStatus) {
         return flightProgressStatusRepository.save(flightProgressStatus);
     }
 
@@ -29,12 +29,12 @@ public class FlightProgressStatusServiceImpl implements FlightProgressStatusServ
     }
 
     @Override
-    public FlightProgressStatus update(FlightProgressStatus flightProgressStatus) {
+    public FlightProgressStatus update(final FlightProgressStatus flightProgressStatus) {
         return flightProgressStatusRepository.saveAndFlush(flightProgressStatus);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         flightProgressStatusRepository.deleteById(id);
     }
 }

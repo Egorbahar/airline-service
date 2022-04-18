@@ -14,12 +14,12 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
     @Override
-    public Category findById(Long id) {
+    public Category findById(final Long id) {
         return categoryRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public Category save(Category category) {
+    public Category save(final Category category) {
         return categoryRepository.save(category);
     }
 
@@ -29,12 +29,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category update(Category category) {
+    public Category update(final Category category) {
         return categoryRepository.saveAndFlush(category);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         categoryRepository.deleteById(id);
     }
 }

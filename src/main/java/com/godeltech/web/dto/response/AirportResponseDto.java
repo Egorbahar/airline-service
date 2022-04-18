@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class AirportResponseDto {
-    private Long id;
-    private String code;
+    private final Long id;
+    private final String code;
 }

@@ -5,13 +5,13 @@ import com.godeltech.persistence.model.User;
 import java.util.List;
 
 public interface UserService {
-    User findById(Long id);
+    User findById(final Long id);
 
-    User save(User user);
+    User save(final User user);
 
     List<User> findAll();
 
-    User update(User user);
+    User update(final User user);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

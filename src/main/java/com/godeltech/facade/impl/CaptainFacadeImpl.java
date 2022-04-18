@@ -19,7 +19,7 @@ public class CaptainFacadeImpl implements CaptainFacade {
     private final CaptainMapper captainMapper;
 
     @Override
-    public CaptainResponseDto findById(Long id) {
+    public CaptainResponseDto findById(final Long id) {
         return captainMapper.toCaptainResponseDto(captainService.findById(id));
     }
 
@@ -29,19 +29,19 @@ public class CaptainFacadeImpl implements CaptainFacade {
     }
 
     @Override
-    public CaptainResponseDto save(CaptainRequestDto captainRequestDto) {
+    public CaptainResponseDto save(final CaptainRequestDto captainRequestDto) {
         return captainMapper.toCaptainResponseDto(captainService.save(captainMapper.toCaptain(captainRequestDto)));
     }
 
     @Override
-    public CaptainResponseDto update(Long id, CaptainRequestDto captainRequestDto) {
+    public CaptainResponseDto update(final Long id,final  CaptainRequestDto captainRequestDto) {
         Captain captain = captainService.findById(id);
         captainMapper.updateEntity(captain, captainRequestDto);
         return captainMapper.toCaptainResponseDto(captainService.update(captain));
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         captainService.deleteById(id);
     }
 }

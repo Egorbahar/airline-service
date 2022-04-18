@@ -4,13 +4,15 @@ import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 @Data
 public class SecondPilotRequestDto {
-    @NotBlank(message = "The name is required.")
+    @NotBlank(message = "{secondPilot.name.notBlank}")
     private String name;
-    @NotNull
+    @NotNull(message = "{secondPilot.flights.notNull}")
+    @Positive(message = "{secondPilot.flights.positive}")
     private Integer flightsNumber;
-    @NotBlank(message = "The rank is required.")
+    @NotBlank(message = "{secondPilot.rank.notBlank}")
     private String rank;
 }

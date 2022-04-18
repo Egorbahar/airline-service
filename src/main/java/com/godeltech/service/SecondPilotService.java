@@ -5,13 +5,13 @@ import com.godeltech.persistence.model.SecondPilot;
 import java.util.List;
 
 public interface SecondPilotService {
-    SecondPilot findById(Long id);
+    SecondPilot findById(final Long id);
 
-    SecondPilot save(SecondPilot secondPilot);
+    SecondPilot save(final SecondPilot secondPilot);
 
     List<SecondPilot> findAll();
 
-    SecondPilot update(SecondPilot secondPilot);
+    SecondPilot update(final SecondPilot secondPilot);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

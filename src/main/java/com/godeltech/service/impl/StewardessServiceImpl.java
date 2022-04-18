@@ -14,12 +14,12 @@ public class StewardessServiceImpl implements StewardessService {
     private final StewardessRepository stewardessRepository;
 
     @Override
-    public Stewardess findById(Long id) {
+    public Stewardess findById(final Long id) {
         return stewardessRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public Stewardess save(Stewardess stewardess) {
+    public Stewardess save(final Stewardess stewardess) {
         return stewardessRepository.save(stewardess);
     }
 
@@ -29,12 +29,12 @@ public class StewardessServiceImpl implements StewardessService {
     }
 
     @Override
-    public Stewardess update(Stewardess stewardess) {
+    public Stewardess update(final Stewardess stewardess) {
         return stewardessRepository.saveAndFlush(stewardess);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         stewardessRepository.deleteById(id);
     }
 }

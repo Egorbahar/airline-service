@@ -7,10 +7,10 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class AirplaneRequestDto {
-    @NotBlank(message = "The name is required.")
+    @NotBlank(message = "{airplane.name.notBlank}")
     private String name;
-    @NotNull(message = "The speed of wind is required.")
+    @NotNull(message = "{airplane.wind.notNull}")
     private Double windSpeed;
-    @NotNull(message = "The category is required.")
+    @NotNull(message = "{airplane.categoryId.notNull}")
     private Long categoryId;
 }

@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class AirplaneResponseDto {
-    private Long id;
-    private String name;
-    private Double windSpeed;
-    private Long categoryId;
+    private final Long id;
+    private final String name;
+    private final Double windSpeed;
+    private final Long categoryId;
 }

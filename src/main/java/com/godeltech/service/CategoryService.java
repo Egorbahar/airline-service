@@ -5,13 +5,13 @@ import com.godeltech.persistence.model.Category;
 import java.util.List;
 
 public interface CategoryService {
-    Category findById(Long id);
+    Category findById(final Long id);
 
-    Category save(Category category);
+    Category save(final Category category);
 
     List<Category> findAll();
 
-    Category update(Category category);
+    Category update(final Category category);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class SecondPilotResponseDto {
-    private Long id;
-    private String name;
-    private Integer flightsNumber;
-    private String rank;
+    private final Long id;
+    private final String name;
+    private final Integer flightsNumber;
+    private final String rank;
 }

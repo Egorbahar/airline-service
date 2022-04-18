@@ -6,14 +6,14 @@ import com.godeltech.web.dto.response.CategoryResponseDto;
 import java.util.List;
 
 public interface CategoryFacade {
-    CategoryResponseDto findById(Long id);
+    CategoryResponseDto findById(final Long id);
 
     List<CategoryResponseDto> findAll();
 
-    CategoryResponseDto save(CategoryRequestDto categoryRequestDto);
+    CategoryResponseDto save(final CategoryRequestDto categoryRequestDto);
 
-    CategoryResponseDto update(Long id, CategoryRequestDto categoryRequestDto);
+    CategoryResponseDto update(final Long id,final CategoryRequestDto categoryRequestDto);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }
 

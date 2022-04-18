@@ -6,13 +6,13 @@ import com.godeltech.web.dto.response.StewardessResponseDto;
 import java.util.List;
 
 public interface StewardessFacade {
-    StewardessResponseDto findById(Long id);
+    StewardessResponseDto findById(final Long id);
 
     List<StewardessResponseDto> findAll();
 
-    StewardessResponseDto save(StewardessRequestDto stewardessRequestDto);
+    StewardessResponseDto save(final StewardessRequestDto stewardessRequestDto);
 
-    StewardessResponseDto update(Long id, StewardessRequestDto stewardessRequestDto);
+    StewardessResponseDto update(final Long id, final StewardessRequestDto stewardessRequestDto);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

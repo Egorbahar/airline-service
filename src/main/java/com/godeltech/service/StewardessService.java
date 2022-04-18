@@ -5,13 +5,13 @@ import com.godeltech.persistence.model.Stewardess;
 import java.util.List;
 
 public interface StewardessService {
-    Stewardess findById(Long id);
+    Stewardess findById(final Long id);
 
-    Stewardess save(Stewardess stewardess);
+    Stewardess save(final Stewardess stewardess);
 
     List<Stewardess> findAll();
 
-    Stewardess update(Stewardess stewardess);
+    Stewardess update(final Stewardess stewardess);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

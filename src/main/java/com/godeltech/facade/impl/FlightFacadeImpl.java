@@ -27,7 +27,7 @@ public class FlightFacadeImpl implements FlightFacade {
     private final RestTemplate restTemplate;
 
     @Override
-    public FlightResponseDto findById(Long id) {
+    public FlightResponseDto findById(final Long id) {
         return flightMapper.toFlightResponseDto(flightService.findById(id));
     }
 
@@ -37,19 +37,19 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
-    public FlightResponseDto save(FlightRequestDto flightRequestDto) {
+    public FlightResponseDto save(final FlightRequestDto flightRequestDto) {
         return flightMapper.toFlightResponseDto(flightService.save(flightMapper.toFlight(flightRequestDto)));
     }
 
     @Override
-    public FlightResponseDto update(Long id, FlightRequestDto flightRequestDto) {
+    public FlightResponseDto update(final Long id, final FlightRequestDto flightRequestDto) {
         Flight flight = flightService.findById(id);
         flightMapper.updateEntity(flight, flightRequestDto);
         return flightMapper.toFlightResponseDto(flightService.update(flight));
     }
 
     @Override
-    public FlightResponseDto updateFlightStartStatus(Long modelId, Long statusId) {
+    public FlightResponseDto updateFlightStartStatus(final Long modelId, final Long statusId) {
         Flight flight = flightService.findById(modelId);
         if (checkWeatherCondition(flight, statusId)) {
             flight.setFlightStartStatus(flightStartStatusService.findById(statusId));
@@ -58,7 +58,7 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
-    public FlightResponseDto updateFlightProgressStatus(Long modelId, Long statusId) {
+    public FlightResponseDto updateFlightProgressStatus(final Long modelId, final Long statusId) {
         Flight flight = flightService.findById(modelId);
         if (checkPermissibleStartStatus(flight)) {
             flight.setFlightProgressStatus(flightProgressStatusService.findById(statusId));
@@ -71,8 +71,8 @@ public class FlightFacadeImpl implements FlightFacade {
         flightService.deleteById(id);
     }
 
-    private boolean checkWeatherCondition(Flight flight, Long statusId) {
-        String url = "http://localhost:8081/api/weather?city=" + flight.getDepartureAirport().getCityName();
+    private boolean checkWeatherCondition(final Flight flight,final Long statusId) {
+        String url = "http://WEATHER-SERVICE/api/weather?city=" + flight.getDepartureAirport().getCityName();
         WeatherDto weatherDto = restTemplate.getForObject(url, WeatherDto.class);
         if (weatherDto != null) {
             if ((flight.getPlane().getWindSpeed() <= weatherDto.getSpeedWind() || weatherDto.getVisibility() <= flight.getDepartureAirport().getVisibility()) && statusId == 2) {
@@ -82,7 +82,7 @@ public class FlightFacadeImpl implements FlightFacade {
         return true;
     }
 
-    private boolean checkPermissibleStartStatus(Flight flight) {
+    private boolean checkPermissibleStartStatus(final Flight flight) {
         if (flight.getFlightStartStatus() == null) {
             return false;
         }

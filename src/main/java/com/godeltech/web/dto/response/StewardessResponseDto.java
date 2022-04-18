@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class StewardessResponseDto {
-    private Long id;
-    private String name;
-    private Integer flightsNumber;
+    private final Long id;
+    private final String name;
+    private final Integer flightsNumber;
 }

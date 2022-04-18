@@ -5,13 +5,13 @@ import com.godeltech.persistence.model.FlightStartStatus;
 import java.util.List;
 
 public interface FlightStartStatusService {
-    FlightStartStatus findById(Long id);
+    FlightStartStatus findById(final Long id);
 
-    FlightStartStatus save(FlightStartStatus flightStartStatus);
+    FlightStartStatus save(final FlightStartStatus flightStartStatus);
 
     List<FlightStartStatus> findAll();
 
-    FlightStartStatus update(FlightStartStatus flightStartStatus);
+    FlightStartStatus update(final FlightStartStatus flightStartStatus);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

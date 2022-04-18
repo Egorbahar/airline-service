@@ -14,7 +14,7 @@ public class AirportServiceImpl implements AirportService {
     private final AirportRepository airportRepository;
 
     @Override
-    public Airport findById(Long id) {
+    public Airport findById(final Long id) {
         return airportRepository.findById(id).orElseThrow();
     }
 
@@ -24,17 +24,17 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public Airport save(Airport airport) {
+    public Airport save(final Airport airport) {
         return airportRepository.save(airport);
     }
 
     @Override
-    public Airport update(Airport airport) {
+    public Airport update(final Airport airport) {
         return airportRepository.saveAndFlush(airport);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         airportRepository.deleteById(id);
     }
 }

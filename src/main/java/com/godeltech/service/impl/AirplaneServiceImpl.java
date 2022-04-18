@@ -1,5 +1,7 @@
 package com.godeltech.service.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.persistence.model.Airplane;
 import com.godeltech.persistence.repository.AirplaneRepository;
 import com.godeltech.service.AirplaneService;
@@ -12,10 +14,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AirplaneServiceImpl implements AirplaneService {
     private final AirplaneRepository airplaneRepository;
+    private final LocalMessageSource messageSource;
 
     @Override
-    public Airplane findById(Long id) {
-        return airplaneRepository.findById(id).orElseThrow();
+    public Airplane findById(final Long id) {
+        return airplaneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist", new Object[]{})));
     }
 
     @Override
@@ -24,17 +27,17 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
-    public Airplane save(Airplane airplane) {
+    public Airplane save(final Airplane airplane) {
         return airplaneRepository.save(airplane);
     }
 
     @Override
-    public Airplane update(Airplane airplane) {
+    public Airplane update(final Airplane airplane) {
         return airplaneRepository.saveAndFlush(airplane);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         airplaneRepository.deleteById(id);
     }
 }

@@ -18,7 +18,7 @@ public class FlightProgressStatusFacadeImpl implements FlightProgressStatusFacad
     private final FlightProgressStatusMapper flightProgressStatusMapper;
 
     @Override
-    public FlightProgressStatusResponseDto findById(Long id) {
+    public FlightProgressStatusResponseDto findById(final Long id) {
         return flightProgressStatusMapper.toFlightProgressStatusResponseDto(flightProgressStatusService.findById(id));
     }
 
@@ -28,19 +28,19 @@ public class FlightProgressStatusFacadeImpl implements FlightProgressStatusFacad
     }
 
     @Override
-    public FlightProgressStatusResponseDto save(FlightProgressStatusRequestDto flightProgressStatusRequestDto) {
+    public FlightProgressStatusResponseDto save(final FlightProgressStatusRequestDto flightProgressStatusRequestDto) {
         return flightProgressStatusMapper.toFlightProgressStatusResponseDto(flightProgressStatusService.save(flightProgressStatusMapper.toFlightProgressStatus(flightProgressStatusRequestDto)));
     }
 
     @Override
-    public FlightProgressStatusResponseDto update(Long id, FlightProgressStatusRequestDto flightProgressStatusRequestDto) {
+    public FlightProgressStatusResponseDto update(final Long id, final FlightProgressStatusRequestDto flightProgressStatusRequestDto) {
         FlightProgressStatus flightProgressStatus = flightProgressStatusService.findById(id);
         flightProgressStatusMapper.updateEntity(flightProgressStatus, flightProgressStatusRequestDto);
         return flightProgressStatusMapper.toFlightProgressStatusResponseDto(flightProgressStatusService.update(flightProgressStatus));
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         flightProgressStatusService.deleteById(id);
     }
 }

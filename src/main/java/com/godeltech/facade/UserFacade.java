@@ -6,13 +6,13 @@ import com.godeltech.web.dto.response.UserResponseDto;
 import java.util.List;
 
 public interface UserFacade {
-    UserResponseDto findById(Long id);
+    UserResponseDto findById(final Long id);
 
     List<UserResponseDto> findAll();
 
-    UserResponseDto save(UserRequestDto userRequestDto);
+    UserResponseDto save(final UserRequestDto userRequestDto);
 
-    UserResponseDto update(Long id, UserRequestDto userRequestDto);
+    UserResponseDto update(final Long id, final UserRequestDto userRequestDto);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

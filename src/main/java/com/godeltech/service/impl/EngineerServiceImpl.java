@@ -14,12 +14,12 @@ public class EngineerServiceImpl implements EngineerService {
     private final EngineerRepository engineerRepository;
 
     @Override
-    public Engineer findById(Long id) {
+    public Engineer findById(final Long id) {
         return engineerRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public Engineer save(Engineer engineer) {
+    public Engineer save(final Engineer engineer) {
         return engineerRepository.save(engineer);
     }
 
@@ -29,12 +29,12 @@ public class EngineerServiceImpl implements EngineerService {
     }
 
     @Override
-    public Engineer update(Engineer engineer) {
+    public Engineer update(final Engineer engineer) {
         return engineerRepository.saveAndFlush(engineer);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         engineerRepository.deleteById(id);
     }
 }

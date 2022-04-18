@@ -14,12 +14,12 @@ public class CaptainServiceImpl implements CaptainService {
     private final CaptainRepository captainRepository;
 
     @Override
-    public Captain findById(Long id) {
+    public Captain findById(final Long id) {
         return captainRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public Captain save(Captain captain) {
+    public Captain save(final Captain captain) {
         return captainRepository.save(captain);
     }
 
@@ -29,12 +29,12 @@ public class CaptainServiceImpl implements CaptainService {
     }
 
     @Override
-    public Captain update(Captain captain) {
+    public Captain update(final Captain captain) {
         return captainRepository.saveAndFlush(captain);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         captainRepository.deleteById(id);
     }
 }

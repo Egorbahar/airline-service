@@ -6,13 +6,13 @@ import com.godeltech.web.dto.response.AirportResponseDto;
 import java.util.List;
 
 public interface AirportFacade {
-    AirportResponseDto findById(Long id);
+    AirportResponseDto findById(final Long id);
 
     List<AirportResponseDto> findAll();
 
-    AirportResponseDto save(AirportRequestDto airportRequestDto);
+    AirportResponseDto save(final AirportRequestDto airportRequestDto);
 
-    AirportResponseDto update(Long id, AirportRequestDto airportRequestDto);
+    AirportResponseDto update(final Long id,final AirportRequestDto airportRequestDto);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

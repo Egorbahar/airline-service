@@ -14,12 +14,12 @@ public class FlightServiceImpl implements FlightService {
     private final FlightRepository flightRepository;
 
     @Override
-    public Flight findById(Long id) {
+    public Flight findById(final Long id) {
         return flightRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public Flight save(Flight flight) {
+    public Flight save(final Flight flight) {
         return flightRepository.save(flight);
     }
 
@@ -29,12 +29,12 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
-    public Flight update(Flight flight) {
+    public Flight update(final Flight flight) {
         return flightRepository.saveAndFlush(flight);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         flightRepository.deleteById(id);
     }
 }

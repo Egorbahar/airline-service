@@ -6,13 +6,13 @@ import com.godeltech.web.dto.response.CaptainResponseDto;
 import java.util.List;
 
 public interface CaptainFacade {
-    CaptainResponseDto findById(Long id);
+    CaptainResponseDto findById(final Long id);
 
     List<CaptainResponseDto> findAll();
 
-    CaptainResponseDto save(CaptainRequestDto captainRequestDto);
+    CaptainResponseDto save(final CaptainRequestDto captainRequestDto);
 
-    CaptainResponseDto update(Long id, CaptainRequestDto captainRequestDto);
+    CaptainResponseDto update(final Long id,final CaptainRequestDto captainRequestDto);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

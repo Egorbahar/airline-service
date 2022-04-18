@@ -14,12 +14,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
     @Override
-    public User findById(Long id) {
+    public User findById(final Long id) {
         return userRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public User save(User user) {
+    public User save(final User user) {
         return userRepository.save(user);
     }
 
@@ -29,12 +29,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User user) {
+    public User update(final User user) {
         return userRepository.saveAndFlush(user);
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         userRepository.deleteById(id);
     }
 }

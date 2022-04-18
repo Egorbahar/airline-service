@@ -5,13 +5,13 @@ import com.godeltech.persistence.model.Flight;
 import java.util.List;
 
 public interface FlightService {
-    Flight findById(Long id);
+    Flight findById(final Long id);
 
-    Flight save(Flight flight);
+    Flight save(final Flight flight);
 
     List<Flight> findAll();
 
-    Flight update(Flight flight);
+    Flight update(final Flight flight);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

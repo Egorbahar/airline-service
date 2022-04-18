@@ -21,7 +21,7 @@ public class AirplaneFacadeImpl implements AirplaneFacade {
 
 
     @Override
-    public AirplaneResponseDto findById(Long id) {
+    public AirplaneResponseDto findById(final Long id) {
         return airplaneMapper.toAirplaneResponseDto(airplaneService.findById(id));
     }
 
@@ -31,21 +31,21 @@ public class AirplaneFacadeImpl implements AirplaneFacade {
     }
 
     @Override
-    public AirplaneResponseDto save(AirplaneRequestDto airplaneRequestDto) {
+    public AirplaneResponseDto save(final AirplaneRequestDto airplaneRequestDto) {
         Airplane airplane = airplaneMapper.toAirplane(airplaneRequestDto);
         airplane.setCategory(categoryService.findById(airplaneRequestDto.getCategoryId()));
         return airplaneMapper.toAirplaneResponseDto(airplaneService.save(airplane));
     }
 
     @Override
-    public AirplaneResponseDto update(Long id, AirplaneRequestDto airplaneRequestDto) {
+    public AirplaneResponseDto update(final Long id,final AirplaneRequestDto airplaneRequestDto) {
         Airplane airplane = airplaneService.findById(id);
         airplaneMapper.updateEntity(airplane,airplaneRequestDto);
         return airplaneMapper.toAirplaneResponseDto(airplaneService.update(airplane));
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(final Long id) {
         airplaneService.deleteById(id);
     }
 }

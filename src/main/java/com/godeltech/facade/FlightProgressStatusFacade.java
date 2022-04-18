@@ -6,13 +6,13 @@ import com.godeltech.web.dto.response.FlightProgressStatusResponseDto;
 import java.util.List;
 
 public interface FlightProgressStatusFacade {
-    FlightProgressStatusResponseDto findById(Long id);
+    FlightProgressStatusResponseDto findById(final Long id);
 
     List<FlightProgressStatusResponseDto> findAll();
 
-    FlightProgressStatusResponseDto update(Long id, FlightProgressStatusRequestDto flightProgressStatusRequestDto);
+    FlightProgressStatusResponseDto update(final Long id, final FlightProgressStatusRequestDto flightProgressStatusRequestDto);
 
-    FlightProgressStatusResponseDto save(FlightProgressStatusRequestDto flightProgressStatusRequestDto);
+    FlightProgressStatusResponseDto save(final FlightProgressStatusRequestDto flightProgressStatusRequestDto);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }

@@ -5,13 +5,13 @@ import com.godeltech.persistence.model.Engineer;
 import java.util.List;
 
 public interface EngineerService {
-    Engineer findById(Long id);
+    Engineer findById(final Long id);
 
-    Engineer save(Engineer engineer);
+    Engineer save(final Engineer engineer);
 
     List<Engineer> findAll();
 
-    Engineer update(Engineer engineer);
+    Engineer update(final Engineer engineer);
 
-    void deleteById(Long id);
+    void deleteById(final Long id);
 }
