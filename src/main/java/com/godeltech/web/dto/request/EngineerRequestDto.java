@@ -13,6 +13,6 @@ public class EngineerRequestDto {
     @NotNull(message = "{engineer.flights.notNull}")
     @Positive(message = "{engineer.flights.positive}")
     private Integer flightsNumber;
-    @NotBlank(message = "{engineer.speciality.notBlank}.")
+    @NotBlank(message = "{engineer.speciality.notBlank}")
     private String speciality;
 }

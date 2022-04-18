@@ -18,7 +18,7 @@ public class AirplaneServiceImpl implements AirplaneService {
 
     @Override
     public Airplane findById(final Long id) {
-        return airplaneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist", new Object[]{})));
+        return airplaneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist".toString(), new Object[]{})));
     }
 
     @Override
