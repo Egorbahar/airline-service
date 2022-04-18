@@ -1,0 +1,364 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2022-04-05--01-captain-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: captain
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: captain_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: flights_number
+                  type: int
+                  constraints:
+                    rullable: false
+              - column:
+                  name: rank
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2022-04-05--02-second-pilot-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: second_pilot
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: second_pilot_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: flights_number
+                  type: int
+                  constraints:
+                    rullable: false
+              - column:
+                  name: rank
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2022-04-05--03-stewardess-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: stewardess
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: stewardess_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: flights_number
+                  type: int
+                  constraints:
+                    rullable: false
+  - changeSet:
+      id: 2022-04-05--04-engineer-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: engineer
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: engineer_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: flights_number
+                  type: int
+                  constraints:
+                    rullable: false
+              - column:
+                  name: speciality
+                  type: varchar(50)
+                  constraints:
+                    rullable: false
+  - changeSet:
+      id: 2022-04-05--05-category-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: category
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: category_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2022-04-05--06-airplane-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: airplane
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: airplane_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                   name: wind_speed
+                   type: float
+                   constraints:
+                    nullable: false
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_category_id
+                    references: category(id)
+  - changeSet:
+      id: 2022-04-05--07-role-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: role_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2022-04-05--08-user-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: user_id
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_role_id
+                    references: role(id)
+  - changeSet:
+      id: 2022-04-07--09-airport-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: airport
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: airport_id
+                    nullable: false
+              - column:
+                  name: code
+                  type: varchar(3)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city_name
+                  type: varchar(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: visibility
+                  type: int
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 2022-04-11--10-flight_start_status-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: flight_start_status
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: flight_start_status_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2022-04-11--11-flight_progress_status-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: flight_progress_status
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: flight_progress_status_id
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 2022-04-07--10-flight-create-table
+      author: yahor
+      changes:
+        - createTable:
+            tableName: flight
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: flight_id
+                    nullable: false
+              - column:
+                  name: departure_airport_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_departure_airport_id
+                    references: airport(id)
+              - column:
+                  name: arrival_airport_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_arrival_airport_id
+                    references: airport(id)
+              - column:
+                  name: plane_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_airplane_id
+                    references: airplane(id)
+              - column:
+                  name: captain_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_captain_id
+                    references: captain(id)
+              - column:
+                  name: second_pilot_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_second_pilot_id
+                    references: second_pilot(id)
+              - column:
+                  name: stewardess_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_stewardess_id
+                    references: stewardess(id)
+              - column:
+                  name: engineer_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_engineer_id
+                    references: engineer(id)
+              - column:
+                  name: flight_progress_status_idflight_start_status
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_flight_progress_status_id
+                    references: flight_progress_status(id)
+              - column:
+                  name: flight_start_status_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_flight_start_status_id
+                    references: flight_start_status(id)
