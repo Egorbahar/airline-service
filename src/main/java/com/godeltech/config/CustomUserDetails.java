@@ -14,7 +14,7 @@ public class CustomUserDetails implements UserDetails {
     private String password;
     private Collection<? extends GrantedAuthority> grantedAuthorities;
 
-    public static CustomUserDetails fromUserEntityToCustomUserDetails(User user) {
+    public CustomUserDetails fromUserEntityToCustomUserDetails(User user) {
         CustomUserDetails customUserDetails = new CustomUserDetails();
         customUserDetails.userName = user.getUsername();
         customUserDetails.password = user.getPassword();
