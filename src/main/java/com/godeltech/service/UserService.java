@@ -7,6 +7,8 @@ import java.util.List;
 public interface UserService {
     User findById(final Long id);
 
+    User findByUserName(final String userName);
+
     User save(final User user);
 
     List<User> findAll();
@@ -14,4 +16,6 @@ public interface UserService {
     User update(final User user);
 
     void deleteById(final Long id);
+
+    User findByUserNameAndPassword(String userName, String password);
 }

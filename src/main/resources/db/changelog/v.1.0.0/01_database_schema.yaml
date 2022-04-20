@@ -187,11 +187,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
   - changeSet:
-      id: 2022-04-05--08-user-create-table
+      id: 2022-04-05--08-users-create-table
       author: yahor
       changes:
         - createTable:
-            tableName: user
+            tableName: users
             columns:
               - column:
                   name: id
@@ -204,6 +204,11 @@ databaseChangeLog:
               - column:
                   name: username
                   type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(100)
                   constraints:
                     nullable: false
               - column:
@@ -349,7 +354,7 @@ databaseChangeLog:
                     foreignKeyName: fk_engineer_id
                     references: engineer(id)
               - column:
-                  name: flight_progress_status_idflight_start_status
+                  name: flight_progress_status_id
                   type: bigint
                   constraints:
                     nullable: true
