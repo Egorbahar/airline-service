@@ -7,11 +7,13 @@ import com.godeltech.persistence.repository.AirplaneRepository;
 import com.godeltech.service.AirplaneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class AirplaneServiceImpl implements AirplaneService {
     private final AirplaneRepository airplaneRepository;
     private final LocalMessageSource messageSource;
@@ -27,16 +29,19 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
+    @Transactional
     public Airplane save(final Airplane airplane) {
         return airplaneRepository.save(airplane);
     }
 
     @Override
+    @Transactional
     public Airplane update(final Airplane airplane) {
         return airplaneRepository.saveAndFlush(airplane);
     }
 
     @Override
+    @Transactional
     public void deleteById(final Long id) {
         airplaneRepository.deleteById(id);
     }

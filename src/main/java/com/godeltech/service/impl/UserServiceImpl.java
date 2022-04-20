@@ -7,14 +7,15 @@ import com.godeltech.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -28,6 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User save(final User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
@@ -39,11 +41,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User update(final User user) {
         return userRepository.saveAndFlush(user);
     }
 
     @Override
+    @Transactional
     public void deleteById(final Long id) {
         userRepository.deleteById(id);
     }
@@ -58,6 +62,4 @@ public class UserServiceImpl implements UserService {
         }
         return null; //write exception
     }
-
-
 }

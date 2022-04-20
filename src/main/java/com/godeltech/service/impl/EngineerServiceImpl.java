@@ -5,11 +5,13 @@ import com.godeltech.persistence.repository.EngineerRepository;
 import com.godeltech.service.EngineerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class EngineerServiceImpl implements EngineerService {
     private final EngineerRepository engineerRepository;
 
@@ -19,6 +21,7 @@ public class EngineerServiceImpl implements EngineerService {
     }
 
     @Override
+    @Transactional
     public Engineer save(final Engineer engineer) {
         return engineerRepository.save(engineer);
     }
@@ -29,11 +32,13 @@ public class EngineerServiceImpl implements EngineerService {
     }
 
     @Override
+    @Transactional
     public Engineer update(final Engineer engineer) {
         return engineerRepository.saveAndFlush(engineer);
     }
 
     @Override
+    @Transactional
     public void deleteById(final Long id) {
         engineerRepository.deleteById(id);
     }

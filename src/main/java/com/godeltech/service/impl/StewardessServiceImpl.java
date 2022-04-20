@@ -5,11 +5,13 @@ import com.godeltech.persistence.repository.StewardessRepository;
 import com.godeltech.service.StewardessService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class StewardessServiceImpl implements StewardessService {
     private final StewardessRepository stewardessRepository;
 
@@ -19,6 +21,7 @@ public class StewardessServiceImpl implements StewardessService {
     }
 
     @Override
+    @Transactional
     public Stewardess save(final Stewardess stewardess) {
         return stewardessRepository.save(stewardess);
     }
@@ -29,11 +32,13 @@ public class StewardessServiceImpl implements StewardessService {
     }
 
     @Override
+    @Transactional
     public Stewardess update(final Stewardess stewardess) {
         return stewardessRepository.saveAndFlush(stewardess);
     }
 
     @Override
+    @Transactional
     public void deleteById(final Long id) {
         stewardessRepository.deleteById(id);
     }
