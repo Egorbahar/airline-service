@@ -10,13 +10,16 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-//    @Mapping(target = "id", source = "id")
-//    @Mapping(target = "name", source = "name")
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "username", source = "username")
+    @Mapping(target = "password", source = "password")
+    @Mapping(target = "roleId", source = "role.id")
     UserResponseDto toUserResponseDto(User user);
 
-//    @Mapping(target = "id", ignore = true)
-//    @Mapping(target = "name", source = "name")
-//    @Mapping(target = "flyingWindSpeed", source = "flyingWindSpeed")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "username", source = "username")
+    @Mapping(target = "password", source = "password")
+    @Mapping(target = "role.id", source = "roleId")
     User toUser(UserRequestDto userRequestDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

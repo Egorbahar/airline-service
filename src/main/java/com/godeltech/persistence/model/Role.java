@@ -2,6 +2,7 @@ package com.godeltech.persistence.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "role")
+@Proxy(lazy = false)
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

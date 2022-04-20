@@ -17,3 +17,7 @@ management:
     web:
       exposure:
         include: "*"
+jwt:
+  secret: java_web_token_key
+  expirationMin: 10
+  refreshExpirationMs : 800000

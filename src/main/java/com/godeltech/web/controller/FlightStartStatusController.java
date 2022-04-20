@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/startstatuses")
+@RequestMapping("/start/statuses")
 public class FlightStartStatusController {
     private final FlightStartStatusFacade flightStartStatusFacade;
 
