@@ -5,11 +5,13 @@ import com.godeltech.persistence.repository.SecondPilotRepository;
 import com.godeltech.service.SecondPilotService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class SecondPilotServiceImpl implements SecondPilotService {
     private final SecondPilotRepository secondPilotRepository;
 
@@ -19,6 +21,7 @@ public class SecondPilotServiceImpl implements SecondPilotService {
     }
 
     @Override
+    @Transactional
     public SecondPilot save(final SecondPilot secondPilot) {
         return secondPilotRepository.save(secondPilot);
     }
@@ -29,11 +32,13 @@ public class SecondPilotServiceImpl implements SecondPilotService {
     }
 
     @Override
+    @Transactional
     public SecondPilot update(final SecondPilot secondPilot) {
         return secondPilotRepository.saveAndFlush(secondPilot);
     }
 
     @Override
+    @Transactional
     public void deleteById(final Long id) {
         secondPilotRepository.deleteById(id);
     }

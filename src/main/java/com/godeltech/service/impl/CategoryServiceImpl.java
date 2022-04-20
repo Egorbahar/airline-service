@@ -5,11 +5,13 @@ import com.godeltech.persistence.repository.CategoryRepository;
 import com.godeltech.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
 
@@ -19,6 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public Category save(final Category category) {
         return categoryRepository.save(category);
     }
@@ -29,11 +32,13 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public Category update(final Category category) {
         return categoryRepository.saveAndFlush(category);
     }
 
     @Override
+    @Transactional
     public void deleteById(final Long id) {
         categoryRepository.deleteById(id);
     }
