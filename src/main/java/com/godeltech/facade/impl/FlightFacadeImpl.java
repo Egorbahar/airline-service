@@ -12,12 +12,14 @@ import com.godeltech.web.dto.request.FlightRequestDto;
 import com.godeltech.web.dto.response.FlightResponseDto;
 import com.godeltech.web.dto.WeatherDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class FlightFacadeImpl implements FlightFacade {
     private final FlightService flightService;
@@ -28,29 +30,34 @@ public class FlightFacadeImpl implements FlightFacade {
 
     @Override
     public FlightResponseDto findById(final Long id) {
+        log.debug("Find flight with id:{}", id);
         return flightMapper.toFlightResponseDto(flightService.findById(id));
     }
 
     @Override
     public List<FlightResponseDto> findAll() {
+        log.debug("Find all flights");
         return flightMapper.toFlightResponseDtoList(flightService.findAll());
     }
 
     @Override
     public FlightResponseDto save(final FlightRequestDto flightRequestDto) {
+        log.debug("Save flight");
         return flightMapper.toFlightResponseDto(flightService.save(flightMapper.toFlight(flightRequestDto)));
     }
 
     @Override
     public FlightResponseDto update(final Long id, final FlightRequestDto flightRequestDto) {
+        log.debug("Update flight with id:{}", id);
         Flight flight = flightService.findById(id);
         flightMapper.updateEntity(flight, flightRequestDto);
         return flightMapper.toFlightResponseDto(flightService.update(flight));
     }
 
     @Override
-    public FlightResponseDto updateFlightStartStatus(final Long modelId, final Long statusId) {
-        Flight flight = flightService.findById(modelId);
+    public FlightResponseDto updateFlightStartStatus(final Long flightId, final Long statusId) {
+        log.debug("Partial update flight with id:{}", flightId);
+        Flight flight = flightService.findById(flightId);
         if (checkWeatherCondition(flight, statusId)) {
             flight.setFlightStartStatus(flightStartStatusService.findById(statusId));
         }
@@ -58,8 +65,9 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     @Override
-    public FlightResponseDto updateFlightProgressStatus(final Long modelId, final Long statusId) {
-        Flight flight = flightService.findById(modelId);
+    public FlightResponseDto updateFlightProgressStatus(final Long flightId, final Long statusId) {
+        log.debug("Partial update flight with id:{}", flightId);
+        Flight flight = flightService.findById(flightId);
         if (checkPermissibleStartStatus(flight)) {
             flight.setFlightProgressStatus(flightProgressStatusService.findById(statusId));
         } else throw new StatusException("Start status is invalid for changing progress status");
@@ -68,10 +76,12 @@ public class FlightFacadeImpl implements FlightFacade {
 
     @Override
     public void deleteById(Long id) {
+        log.debug("Delete flight with id:{}", id);
         flightService.deleteById(id);
     }
 
     private boolean checkWeatherCondition(final Flight flight,final Long statusId) {
+        log.debug("Check weather condition");
         String url = "http://WEATHER-SERVICE/api/weather?city=" + flight.getDepartureAirport().getCityName();
         WeatherDto weatherDto = restTemplate.getForObject(url, WeatherDto.class);
         if (weatherDto != null) {
@@ -83,6 +93,7 @@ public class FlightFacadeImpl implements FlightFacade {
     }
 
     private boolean checkPermissibleStartStatus(final Flight flight) {
+        log.debug("Check permission for start status");
         if (flight.getFlightStartStatus() == null) {
             return false;
         }

@@ -10,6 +10,7 @@ import com.godeltech.web.dto.request.AuthorizationRequestDto;
 import com.godeltech.web.dto.request.TokenRefreshRequestDto;
 import com.godeltech.web.dto.response.AuthorizationResponseDto;
 import com.godeltech.web.dto.response.TokenRefreshResponseDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/authentication")
@@ -31,6 +33,7 @@ public class AuthorizationController {
 
     @PostMapping("/auth")
     public ResponseEntity<AuthorizationResponseDto> auth(@RequestBody AuthorizationRequestDto authorizationRequestDto) {
+        log.info("Auth contr");
         User user = userService.findByUserNameAndPassword(authorizationRequestDto.getUsername(), authorizationRequestDto.getPassword());
         String token = jwtProvider.generateToken(user.getUsername());
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(user.getId());
