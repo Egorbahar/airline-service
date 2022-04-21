@@ -40,15 +40,17 @@ public class EngineerController {
         log.info("Save new engineer");
         return new ResponseEntity<>(engineerFacade.save(engineerRequestDto), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable @Validated @NotNull @Positive Long id) {
         log.info("Delete engineer with id:{}", id);
         engineerFacade.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<EngineerResponseDto> update(@PathVariable @Validated @NotNull @Positive Long id,
-                                                     @RequestBody EngineerRequestDto engineerRequestDto) {
+                                                      @RequestBody EngineerRequestDto engineerRequestDto) {
         log.info("Update engineer with id:{}", id);
         return new ResponseEntity<>(engineerFacade.update(id, engineerRequestDto), HttpStatus.OK);
     }

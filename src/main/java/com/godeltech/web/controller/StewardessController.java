@@ -40,15 +40,17 @@ public class StewardessController {
         log.info("Save new stewardess");
         return new ResponseEntity<>(stewardessFacade.save(stewardessRequestDto), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable @Validated @NotNull @Positive Long id) {
         log.info("Delete stewardess with id:{}", id);
         stewardessFacade.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<StewardessResponseDto> update(@PathVariable @Validated @NotNull @Positive Long id,
-                                                         @RequestBody StewardessRequestDto stewardessRequestDto) {
+                                                        @RequestBody StewardessRequestDto stewardessRequestDto) {
         log.info("Update stewardess with id:{}", id);
         return new ResponseEntity<>(stewardessFacade.update(id, stewardessRequestDto), HttpStatus.OK);
     }

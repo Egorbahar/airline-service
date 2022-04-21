@@ -36,11 +36,12 @@ public class AuthorizationController {
     @PostMapping("/auth")
     public ResponseEntity<AuthorizationResponseDto> auth(@RequestBody @Validated AuthorizationRequestDto authorizationRequestDto) {
         log.info("Auth contr");
-        User user = userService.findByUserNameAndPassword(authorizationRequestDto.getUsername(), authorizationRequestDto.getPassword());
+        User user = userService.findByUsernameAndPassword(authorizationRequestDto.getUsername(), authorizationRequestDto.getPassword());
         String token = jwtProvider.generateToken(user.getUsername());
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(user.getId());
-        return ResponseEntity.ok(new AuthorizationResponseDto(token,refreshToken.getToken(), user.getRole().getName(), user.getId()));
+        return ResponseEntity.ok(new AuthorizationResponseDto(token, refreshToken.getToken(), user.getRole().getName(), user.getId()));
     }
+
     @PostMapping("/auth/refreshtoken")
     public ResponseEntity<?> refreshToken(@RequestBody @Validated TokenRefreshRequestDto tokenRefreshRequestDto) {
         String requestRefreshToken = tokenRefreshRequestDto.getRefreshToken();
@@ -56,10 +57,10 @@ public class AuthorizationController {
                         "Refresh token is not in database!"));
     }
 
-    @RequestMapping(value="/signout", method= RequestMethod.GET)
+    @RequestMapping(value = "/signout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
+        if (auth != null) {
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
         return "redirect:/";

@@ -50,7 +50,7 @@ public class FlightStartStatusController {
 
     @PutMapping("{id}")
     public ResponseEntity<FlightStartStatusResponseDto> update(@PathVariable @Validated @NotNull @Positive Long id,
-                                                    @RequestBody FlightStartStatusRequestDto flightStartStatusRequestDto) {
+                                                               @RequestBody FlightStartStatusRequestDto flightStartStatusRequestDto) {
         log.info("Update start status with id:{}", id);
         return new ResponseEntity<>(flightStartStatusFacade.update(id, flightStartStatusRequestDto), HttpStatus.OK);
     }

@@ -40,15 +40,17 @@ public class UserController {
         log.info("Save new user");
         return new ResponseEntity<>(userFacade.save(userRequestDto), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable @Validated @NotNull @Positive Long id) {
         log.info("Delete user with id:{}", id);
         userFacade.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<UserResponseDto> update(@PathVariable @Validated @NotNull @Positive Long id,
-                                                        @RequestBody UserRequestDto userRequestDto) {
+                                                  @RequestBody UserRequestDto userRequestDto) {
         log.info("Update user with id:{}", id);
         return new ResponseEntity<>(userFacade.update(id, userRequestDto), HttpStatus.OK);
     }

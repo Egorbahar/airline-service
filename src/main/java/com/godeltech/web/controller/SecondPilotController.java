@@ -40,15 +40,17 @@ public class SecondPilotController {
         log.info("Save new second pilot");
         return new ResponseEntity<>(secondPilotFacade.save(secondPilotRequestDto), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable @Validated @NotNull @Positive Long id) {
         log.info("Delete second pilot with id:{}", id);
         secondPilotFacade.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<SecondPilotResponseDto> update(@PathVariable @Validated @NotNull @Positive Long id,
-                                                      @RequestBody SecondPilotRequestDto secondPilotRequestDto) {
+                                                         @RequestBody SecondPilotRequestDto secondPilotRequestDto) {
         log.info("Update second pilot with id:{}", id);
         return new ResponseEntity<>(secondPilotFacade.update(id, secondPilotRequestDto), HttpStatus.OK);
     }

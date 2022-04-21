@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserService {
     User findById(final Long id);
 
-    User findByUserName(final String userName);
+    User findByUserName(final String username);
 
     User save(final User user);
 
@@ -17,5 +17,5 @@ public interface UserService {
 
     void deleteById(final Long id);
 
-    User findByUserNameAndPassword(String userName, String password);
+    User findByUsernameAndPassword(String username, String password);
 }

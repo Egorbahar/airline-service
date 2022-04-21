@@ -40,12 +40,14 @@ public class CategoryController {
         log.info("Save new category");
         return new ResponseEntity<>(categoryFacade.save(categoryRequestDto), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable @Validated @NotNull @Positive Long id) {
         log.info("Delete category with id:{}", id);
         categoryFacade.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<CategoryResponseDto> update(@PathVariable @Validated @NotNull @Positive Long id,
                                                       @RequestBody CategoryRequestDto categoryRequestDto) {
