@@ -22,6 +22,7 @@ import java.util.List;
 @Slf4j
 public class AirportController {
     private final AirportFacade airportFacade;
+
     @GetMapping("/{id}")
     public ResponseEntity<AirportResponseDto> findById(@PathVariable @Validated @NotNull @Positive Long id) {
         log.info("Find airport with id:{}", id);
@@ -39,15 +40,17 @@ public class AirportController {
         log.info("Save new airport");
         return new ResponseEntity<>(airportFacade.save(airportRequestDto), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable @Validated @NotNull @Positive Long id) {
         log.info("Delete airport with id:{}", id);
         airportFacade.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<AirportResponseDto> update(@PathVariable @Validated @NotNull @Positive Long id,
-                                                      @RequestBody AirportRequestDto airportRequestDto) {
+                                                     @RequestBody AirportRequestDto airportRequestDto) {
         log.info("Update airport with id:{}", id);
         return new ResponseEntity<>(airportFacade.update(id, airportRequestDto), HttpStatus.OK);
     }

@@ -1,5 +1,7 @@
 package com.godeltech.service.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.persistence.model.FlightProgressStatus;
 import com.godeltech.persistence.repository.FlightProgressStatusRepository;
 import com.godeltech.service.FlightProgressStatusService;
@@ -16,11 +18,12 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class FlightProgressStatusServiceImpl implements FlightProgressStatusService {
     private final FlightProgressStatusRepository flightProgressStatusRepository;
+    private final LocalMessageSource messageSource;
 
     @Override
     public FlightProgressStatus findById(final Long id) {
         log.debug("Find progress status with id:{}", id);
-        return flightProgressStatusRepository.findById(id).orElseThrow();
+        return flightProgressStatusRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist", new Object[]{})));
     }
 
     @Override
@@ -40,6 +43,7 @@ public class FlightProgressStatusServiceImpl implements FlightProgressStatusServ
     @Transactional
     public FlightProgressStatus update(final FlightProgressStatus flightProgressStatus) {
         log.debug("Update progress status with id:{}", flightProgressStatus.getId());
+        findById(flightProgressStatus.getId());
         return flightProgressStatusRepository.saveAndFlush(flightProgressStatus);
     }
 
@@ -47,6 +51,7 @@ public class FlightProgressStatusServiceImpl implements FlightProgressStatusServ
     @Transactional
     public void deleteById(final Long id) {
         log.debug("Delete progress status with id:{}", id);
+        findById(id);
         flightProgressStatusRepository.deleteById(id);
     }
 }

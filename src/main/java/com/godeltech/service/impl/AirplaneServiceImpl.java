@@ -23,7 +23,7 @@ public class AirplaneServiceImpl implements AirplaneService {
     @Override
     public Airplane findById(final Long id) {
         log.debug("Find airplane with id:{}", id);
-        return airplaneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist".toString(), new Object[]{})));
+        return airplaneRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist", new Object[]{})));
     }
 
     @Override
@@ -43,6 +43,7 @@ public class AirplaneServiceImpl implements AirplaneService {
     @Transactional
     public Airplane update(final Airplane airplane) {
         log.debug("Update airplane with id:{}", airplane.getId());
+        findById(airplane.getId());
         return airplaneRepository.saveAndFlush(airplane);
     }
 
@@ -50,6 +51,7 @@ public class AirplaneServiceImpl implements AirplaneService {
     @Transactional
     public void deleteById(final Long id) {
         log.debug("Delete airplane with id:{}", id);
+        findById(id);
         airplaneRepository.deleteById(id);
     }
 }

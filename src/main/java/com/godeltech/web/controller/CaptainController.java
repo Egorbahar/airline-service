@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/captains")
@@ -40,15 +41,17 @@ public class CaptainController {
         log.info("Save new captain");
         return new ResponseEntity<>(captainFacade.save(captainRequestDto), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteById(@PathVariable @Validated @NotNull @Positive Long id) {
         log.info("Delete captain with id:{}", id);
         captainFacade.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
     @PutMapping("{id}")
     public ResponseEntity<CaptainResponseDto> update(@PathVariable @Validated @NotNull @Positive Long id,
-                                                      @RequestBody CaptainRequestDto captainRequestDto) {
+                                                     @RequestBody CaptainRequestDto captainRequestDto) {
         log.info("Update captain with id:{}", id);
         return new ResponseEntity<>(captainFacade.update(id, captainRequestDto), HttpStatus.OK);
     }

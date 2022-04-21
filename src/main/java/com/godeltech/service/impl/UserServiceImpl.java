@@ -1,5 +1,7 @@
 package com.godeltech.service.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.persistence.model.User;
 import com.godeltech.persistence.repository.RoleRepository;
 import com.godeltech.persistence.repository.UserRepository;
@@ -19,17 +21,18 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final LocalMessageSource messageSource;
 
     @Override
     public User findById(final Long id) {
         log.debug("Find user with id:{}", id);
-        return userRepository.findById(id).orElseThrow();
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.user.notExist", new Object[]{})));
     }
 
     @Override
-    public User findByUserName(final String userName) {
-        log.debug("Find user by username:{}", userName);
-        return userRepository.findByUsername(userName);
+    public User findByUserName(final String username) {
+        log.debug("Find user by username:{}", username);
+        return userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.credentials.notValid", new Object[]{})));
     }
 
     @Override
@@ -50,6 +53,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User update(final User user) {
         log.debug("Update user with id:{}", user.getId());
+        findById(user.getId());
         return userRepository.saveAndFlush(user);
     }
 
@@ -57,17 +61,17 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void deleteById(final Long id) {
         log.debug("Delete user with id:{}", id);
+        findById(id);
         userRepository.deleteById(id);
     }
+
     @Override
-    public User findByUserNameAndPassword(String userName, String password) {
+    public User findByUsernameAndPassword(String username, String password) {
         log.debug("Find user by username and password");
-        User user = findByUserName(userName);
-        if (user != null) {
-            if (passwordEncoder.matches(password, user.getPassword())) {
-                return user;
-            }
+        User user = findByUserName(username);
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new ResourceNotFoundException(messageSource.getMessage("error.credentials.notValid", new Object[]{}));
         }
-        return null; //write exception
+        return user;
     }
 }

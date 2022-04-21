@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/progress/statuses")
@@ -49,7 +50,7 @@ public class FlightProgressStatusController {
 
     @PutMapping("{id}")
     public ResponseEntity<FlightProgressStatusResponseDto> update(@PathVariable @Validated @NotNull @Positive Long id,
-                                                               @RequestBody FlightProgressStatusRequestDto flightProgressStatusRequestDto) {
+                                                                  @RequestBody FlightProgressStatusRequestDto flightProgressStatusRequestDto) {
         log.info("Update progress status with id:{}", id);
         return new ResponseEntity<>(flightProgressStatusFacade.update(id, flightProgressStatusRequestDto), HttpStatus.OK);
     }

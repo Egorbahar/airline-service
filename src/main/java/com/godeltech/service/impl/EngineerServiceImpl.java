@@ -1,5 +1,7 @@
 package com.godeltech.service.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.persistence.model.Engineer;
 import com.godeltech.persistence.repository.EngineerRepository;
 import com.godeltech.service.EngineerService;
@@ -16,11 +18,12 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class EngineerServiceImpl implements EngineerService {
     private final EngineerRepository engineerRepository;
+    private final LocalMessageSource messageSource;
 
     @Override
     public Engineer findById(final Long id) {
         log.debug("Find engineer with id:{}", id);
-        return engineerRepository.findById(id).orElseThrow();
+        return engineerRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist", new Object[]{})));
     }
 
     @Override
@@ -40,6 +43,7 @@ public class EngineerServiceImpl implements EngineerService {
     @Transactional
     public Engineer update(final Engineer engineer) {
         log.debug("Find engineer with id:{}", engineer.getId());
+        findById(engineer.getId());
         return engineerRepository.saveAndFlush(engineer);
     }
 
@@ -47,6 +51,7 @@ public class EngineerServiceImpl implements EngineerService {
     @Transactional
     public void deleteById(final Long id) {
         log.debug("Delete engineer with id:{}", id);
+        findById(id);
         engineerRepository.deleteById(id);
     }
 }

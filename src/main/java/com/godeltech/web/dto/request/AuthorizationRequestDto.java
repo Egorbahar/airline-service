@@ -5,8 +5,8 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 @Data
 public class AuthorizationRequestDto {
-    @NotBlank
+    @NotBlank(message = "{authorization.username.notBlank}")
     private String username;
-    @NotBlank
+    @NotBlank(message = "{authorization.password.notBlank}")
     private String password;
 }

@@ -1,5 +1,7 @@
 package com.godeltech.service.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.persistence.model.Captain;
 import com.godeltech.persistence.repository.CaptainRepository;
 import com.godeltech.service.CaptainService;
@@ -16,11 +18,12 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class CaptainServiceImpl implements CaptainService {
     private final CaptainRepository captainRepository;
+    private final LocalMessageSource messageSource;
 
     @Override
     public Captain findById(final Long id) {
         log.debug("Find captain with id:{}", id);
-        return captainRepository.findById(id).orElseThrow();
+        return captainRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist", new Object[]{})));
     }
 
     @Override
@@ -40,6 +43,7 @@ public class CaptainServiceImpl implements CaptainService {
     @Transactional
     public Captain update(final Captain captain) {
         log.debug("Update captain with id:{}", captain.getId());
+        findById(captain.getId());
         return captainRepository.saveAndFlush(captain);
     }
 
@@ -47,6 +51,7 @@ public class CaptainServiceImpl implements CaptainService {
     @Transactional
     public void deleteById(final Long id) {
         log.debug("Delete captain with id:{}", id);
+        findById(id);
         captainRepository.deleteById(id);
     }
 }

@@ -1,5 +1,7 @@
 package com.godeltech.service.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.persistence.model.Flight;
 import com.godeltech.persistence.repository.FlightRepository;
 import com.godeltech.service.FlightService;
@@ -16,11 +18,12 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class FlightServiceImpl implements FlightService {
     private final FlightRepository flightRepository;
+    private final LocalMessageSource messageSource;
 
     @Override
     public Flight findById(final Long id) {
         log.debug("Find flight with id:{}", id);
-        return flightRepository.findById(id).orElseThrow();
+        return flightRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist", new Object[]{})));
     }
 
     @Override
@@ -40,6 +43,7 @@ public class FlightServiceImpl implements FlightService {
     @Transactional
     public Flight update(final Flight flight) {
         log.debug("Update flight with id:{}", flight.getId());
+        findById(flight.getId());
         return flightRepository.saveAndFlush(flight);
     }
 
@@ -47,6 +51,7 @@ public class FlightServiceImpl implements FlightService {
     @Transactional
     public void deleteById(final Long id) {
         log.debug("Delete flight with id:{}", id);
+        findById(id);
         flightRepository.deleteById(id);
     }
 }

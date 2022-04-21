@@ -1,5 +1,7 @@
 package com.godeltech.service.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.persistence.model.Stewardess;
 import com.godeltech.persistence.repository.StewardessRepository;
 import com.godeltech.service.StewardessService;
@@ -16,11 +18,12 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class StewardessServiceImpl implements StewardessService {
     private final StewardessRepository stewardessRepository;
+    private final LocalMessageSource messageSource;
 
     @Override
     public Stewardess findById(final Long id) {
         log.debug("Find stewardess with id:{}", id);
-        return stewardessRepository.findById(id).orElseThrow();
+        return stewardessRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist", new Object[]{})));
     }
 
     @Override
@@ -40,6 +43,7 @@ public class StewardessServiceImpl implements StewardessService {
     @Transactional
     public Stewardess update(final Stewardess stewardess) {
         log.debug("Update stewardess with id:{}", stewardess.getId());
+        findById(stewardess.getId());
         return stewardessRepository.saveAndFlush(stewardess);
     }
 
@@ -47,6 +51,7 @@ public class StewardessServiceImpl implements StewardessService {
     @Transactional
     public void deleteById(final Long id) {
         log.debug("Delete stewardess with id:{}", id);
+        findById(id);
         stewardessRepository.deleteById(id);
     }
 }

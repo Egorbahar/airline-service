@@ -1,5 +1,7 @@
 package com.godeltech.service.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.exception.TokenRefreshException;
 import com.godeltech.persistence.model.RefreshToken;
 import com.godeltech.persistence.repository.RefreshTokenRepository;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
+
 import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,6 +27,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     private Long refreshTokenDurationMs;
     private final RefreshTokenRepository refreshTokenRepository;
     private final UserRepository userRepository;
+    private final LocalMessageSource messageSource;
 
     @Override
     public Optional<RefreshToken> findByToken(final String token) {
@@ -34,9 +38,9 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Override
     @Transactional
     public RefreshToken createRefreshToken(final Long userId) {
-        log.debug("Create refresh token for user with id:{}",userId);
+        log.debug("Create refresh token for user with id:{}", userId);
         RefreshToken refreshToken = new RefreshToken();
-        refreshToken.setUser(userRepository.findById(userId).get());
+        refreshToken.setUser(userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.user.notExist", new Object[]{}))));
         refreshToken.setExpiryDate(Instant.now().plusMillis(refreshTokenDurationMs));
         refreshToken.setToken(UUID.randomUUID().toString());
         refreshToken = refreshTokenRepository.save(refreshToken);
@@ -49,7 +53,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
         log.debug("Verify refresh token");
         if (refreshToken.getExpiryDate().compareTo(Instant.now()) < 0) {
             refreshTokenRepository.delete(refreshToken);
-            throw new TokenRefreshException(refreshToken.getToken(), "Refresh token was expired. Please make a new sign in request");
+            throw new TokenRefreshException(refreshToken.getToken(), (messageSource.getMessage("error.refreshtoken.isExpired", new Object[]{})));
         }
         return refreshToken;
     }
@@ -57,8 +61,8 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Override
     @Transactional
     public void deleteByUserId(final Long userId) {
-        log.debug("Delete refresh token by user id:{}",userId);
-        refreshTokenRepository.deleteByUser(userRepository.findById(userId).get());
+        log.debug("Delete refresh token by user id:{}", userId);
+        refreshTokenRepository.deleteByUser(userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.user.notExist", new Object[]{}))));
     }
 }
 

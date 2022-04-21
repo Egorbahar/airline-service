@@ -1,5 +1,7 @@
 package com.godeltech.service.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.persistence.model.Category;
 import com.godeltech.persistence.repository.CategoryRepository;
 import com.godeltech.service.CategoryService;
@@ -16,11 +18,12 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
+    private final LocalMessageSource messageSource;
 
     @Override
     public Category findById(final Long id) {
         log.debug("Find category with id:{}", id);
-        return categoryRepository.findById(id).orElseThrow();
+        return categoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("error.record.notExist", new Object[]{})));
     }
 
     @Override
@@ -40,6 +43,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public Category update(final Category category) {
         log.debug("Update category with id:{}", category.getId());
+        findById(category.getId());
         return categoryRepository.saveAndFlush(category);
     }
 
@@ -47,6 +51,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     public void deleteById(final Long id) {
         log.debug("Delete category with id:{}", id);
+        findById(id);
         categoryRepository.deleteById(id);
     }
 }
