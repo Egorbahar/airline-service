@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Slf4j
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/authentication")
@@ -32,7 +34,7 @@ public class AuthorizationController {
     private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/auth")
-    public ResponseEntity<AuthorizationResponseDto> auth(@RequestBody AuthorizationRequestDto authorizationRequestDto) {
+    public ResponseEntity<AuthorizationResponseDto> auth(@RequestBody @Validated AuthorizationRequestDto authorizationRequestDto) {
         log.info("Auth contr");
         User user = userService.findByUserNameAndPassword(authorizationRequestDto.getUsername(), authorizationRequestDto.getPassword());
         String token = jwtProvider.generateToken(user.getUsername());
@@ -40,7 +42,7 @@ public class AuthorizationController {
         return ResponseEntity.ok(new AuthorizationResponseDto(token,refreshToken.getToken(), user.getRole().getName(), user.getId()));
     }
     @PostMapping("/auth/refreshtoken")
-    public ResponseEntity<?> refreshToken(@RequestBody @Valid TokenRefreshRequestDto tokenRefreshRequestDto) {
+    public ResponseEntity<?> refreshToken(@RequestBody @Validated TokenRefreshRequestDto tokenRefreshRequestDto) {
         String requestRefreshToken = tokenRefreshRequestDto.getRefreshToken();
 
         return refreshTokenService.findByToken(requestRefreshToken)

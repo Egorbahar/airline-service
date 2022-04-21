@@ -36,7 +36,7 @@ public class FlightController {
     }
 
     @PostMapping
-    public ResponseEntity<FlightResponseDto> save(@Valid @RequestBody FlightRequestDto flightRequestDto) {
+    public ResponseEntity<FlightResponseDto> save(@Validated  @RequestBody FlightRequestDto flightRequestDto) {
         log.info("Save new flight");
         return new ResponseEntity<>(flightFacade.save(flightRequestDto), HttpStatus.OK);
     }

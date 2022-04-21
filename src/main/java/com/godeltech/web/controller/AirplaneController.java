@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/airplanes")
 @RequiredArgsConstructor
@@ -34,7 +35,7 @@ public class AirplaneController {
     }
 
     @PostMapping
-    public ResponseEntity<AirplaneResponseDto> save(@Valid @RequestBody AirplaneRequestDto airplaneRequestDto) {
+    public ResponseEntity<AirplaneResponseDto> save(@Validated  @RequestBody AirplaneRequestDto airplaneRequestDto) {
         log.info("Save new airplane");
         return new ResponseEntity<>(airplaneFacade.save(airplaneRequestDto), HttpStatus.OK);
     }
