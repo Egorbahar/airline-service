@@ -2,6 +2,7 @@ package com.godeltech.web.handler;
 
 import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.exception.StatusException;
+import com.godeltech.exception.TokenRefreshException;
 import com.godeltech.exception.WeatherConditionsException;
 import com.godeltech.web.dto.response.ErrorResponseDto;
 import com.godeltech.web.dto.response.ExceptionResponseDto;
@@ -66,6 +67,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = ResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest request) {
+        ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        log.error(exception.getMessage());
+        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
+    }
+
+    @ExceptionHandler(value = TokenRefreshException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<Object> handleTokenRefreshException(TokenRefreshException exception, WebRequest request) {
         ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         log.error(exception.getMessage());
         return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
