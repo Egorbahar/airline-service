@@ -3,6 +3,8 @@ spring:
     url: jdbc:postgresql://localhost:15432/airline
     username: postgres
     password: root
+  profiles:
+    active: dev
   jpa:
     generate-ddl: false
     properties:
