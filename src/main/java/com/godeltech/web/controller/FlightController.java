@@ -55,14 +55,14 @@ public class FlightController {
         return new ResponseEntity<>(flightFacade.update(id, flightRequestDto), HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}/starts/{start_status_id}")
+    @PatchMapping("/{id}/flight-init/{start_status_id}")
     public ResponseEntity<FlightResponseDto> updateFlightStartStatus(@PathVariable @NotNull @Positive Long id,
                                                                      @PathVariable("start_status_id") @NotNull @Positive Long startStatusId) {
         log.info("Update start status of the flight with id:{}", id);
         return new ResponseEntity<>(flightFacade.updateFlightStartStatus(id, startStatusId), HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}/progresses/{progress_status_id}")
+    @PatchMapping("/{id}/flight-progress/{progress_status_id}")
     public ResponseEntity<FlightResponseDto> updateFlightProgressStatus(@PathVariable @NotNull @Positive Long id,
                                                                         @PathVariable("progress_status_id") @NotNull @Positive Long progressStatusId) {
         log.info("Update progress status of the flight with id:{}", id);
