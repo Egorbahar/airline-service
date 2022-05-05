@@ -1,14 +1,16 @@
 package com.godeltech.persistence.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Table(name = "airplane")
 @Getter
 @Setter
-@Table(name = "airplane")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class Airplane {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
