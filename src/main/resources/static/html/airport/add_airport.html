@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/airport/add_airports.js"></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en"/>
+    <link rel="stylesheet" type="text/css" href="../../css/airport/add_airport.css">
+</head>
+<body>
+<div class="container">
+    <div style="margin-bottom: 40px; margin-top: 40px;">
+        <a style="font-family: Open Sans; padding: 10px;" href="airport.html" id="all">All records</a>
+    </div>
+    <div class="row">
+        <div class="col-sm-7"
+             style="background-color:#4fc7a7; padding:10px; border-radius:30px; border: solid #26b4c7 1px">
+            <h3 style="font-family: Open Sans; font-weight: 100; color:#ffffff; margin: 30px">Add new airport</h3>
+            <form id="add_new">
+                <div class="form-group">
+                    <label class="control-label" for="code">Code:</label>
+                    <input type="text" class="form-control" id="code"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="city">Name of city:</label>
+                    <input type="text" class="form-control" id="city"
+                           required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="visibility">Visibility:</label>
+                    <input type="text" class="form-control" id="visibility"
+                           required>
+                </div>
+                <button type="submit" class="btn" id="btn-add-new-airport" data-toggle="modal"
+                        data-target="#save-modal">Save
+                </button>
+            </form>
+            <div id="response" style="display:none; margin-top:10px">
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="modal fade" id="save-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            onclick="window.location.href = '../../html/airport/airport.html'"
+                            onclose="window.location.href = '../../html/airplane/airport.html'">Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

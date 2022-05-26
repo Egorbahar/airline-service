@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/airport/delete_airports.js"></script>
+    <script type="text/javascript" src="../../js/airport/update_airports.js"></script>
+    <script type="text/javascript" src="../../js/airport/get_airports.js"></script>
+    <script type="text/javascript" src="../../js/sign_out.js"></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en"/>
+    <link rel="stylesheet" type="text/css" href="../../css/airport/airport.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg  static-top">
+    <div class="container">
+        <a class="navbar-brand" style="color: white; size: 16px;">Airline Service</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="navbar-text" id="hello">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../menu.html">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/" onclick="signOut()">Sign out
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div style="width: 450px; margin-left: 900px; margin-top: 50px; margin-bottom: -70px">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="add-category"
+                onclick="window.location.href = '../airport/add_airport.html'">Add airport
+        </button>
+
+    </div>
+
+    <div id="div_customer_table">
+        <h1 style="font-family: Open Sans; font-weight: 100; color:#2160b4; margin: 0px">Airports</h1>
+        <div class="row col-md-15 table-responsive">
+            <table id="customerTable" class="table table-striped">
+                <thead>
+                <tr style="background-color:#9bfffc ">
+                    <th id="col1" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#6ab4e1">Id</th>
+                    <th id="col2" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">Code</th>
+                    <th id="col3" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">Name of city</th>
+                    <th id="col4" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">Visibility</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="delete-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            onclick="window.location.href = '../airport/airport.html'">Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger" id="model-delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="update-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            onclick="window.location.href = '../airport/airport.html'">Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger" id="model-update-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6" id="div_updating">
+            <form id="update_customer_form">
+                <div class="form-group">
+                    <label for="id">Id:</label>
+                    <input type="text" class="form-control" id="id" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="code_row">Code:</label>
+                    <input type="text" class="form-control" id="code_row"
+                           name="name" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="city_row">Name of city:</label>
+                    <input type="text" class="form-control" id="city_row"
+                           name="cost" required>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="visibility_row">Visibility:</label>
+                    <input type="text" class="form-control" id="visibility_row"
+                           name="cost" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div id="response" style="display:none; margin:10px">
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

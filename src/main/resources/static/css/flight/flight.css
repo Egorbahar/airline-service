@@ -1,0 +1,93 @@
+#add {
+    display: none;
+}
+
+.btn_id, .btn_delete, #add {
+    background: #5eace0;
+    border: solid #EBFFF6 0;
+    -webkit-border-radius: 31px;
+    -moz-border-radius: 31px;
+    border-radius: 31px;
+    text-decoration: none;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    /*height: 53px;*/
+    line-height: 3px;
+    color: #05b4ff;
+    font-family: Open Sans;
+    width: 210px;
+    font-size: 23px;
+    font-weight: 100;
+    padding: 20px;
+    background-color: #EBFFF6;
+    border: solid #1f3bc7 1px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    margin: 10px;
+}
+
+.btn_id {
+    width: 20px;
+    padding-right: 30px;
+}
+
+.btn_delete {
+    width: 20px;
+    padding-right: 30px;
+    background-color: #EBFFF6;
+    border: solid #0D0804 1px;
+    color: #C7C15E;
+}
+
+.navbar {
+    background-color: #1f87c7;
+}
+
+.nav-item, .nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: #F0FF9B;
+}
+
+#add:hover {
+    background-color: #F0FF9B;
+}
+
+#div_customer_table h1 {
+    padding: 20px;
+    margin: 0;
+}
+
+#div_updating {
+    display: none;
+    background-color: #e6fffa;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+#div_updating {
+    display: none;
+    background-color: #e6fffa;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+#div_updating_status {
+    display: none;
+    background-color: #e6fffa;
+    padding: 10px;
+    border-radius: 3px;
+}
+#div_updating_flight_man{
+    display: none;
+    background-color: #e6fffa;
+    padding: 10px;
+    border-radius: 3px;
+}
+body {
+    background: url(https://million-wallpapers.ru/wallpapers/6/23/467472111966514/puxovye-belye-oblaka-vid-sverxu.jpg);
+}
