@@ -5,7 +5,39 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
     ports:
-      - "15432:5432"
+      - 15432:5432
     volumes:
       - ./infrastructure/db:/docker-entrypoint-initdb.d
     restart: unless-stopped
+  app-eureka:
+    build:
+      context: ..\eureka-service .
+      dockerfile: Dockerfile
+    container_name: eureka-container
+    ports:
+      - 8761:8761
+  app-weather:
+    build:
+      context: ..\weather-service .
+      dockerfile: Dockerfile
+    container_name: weather-container
+    depends_on:
+      - app-eureka
+    ports:
+      - 8081:8081
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-container:8761/eureka
+  app-airline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: airline-container
+    depends_on:
+      - app-eureka
+      - app-weather
+      - service-db
+    ports:
+      - 8080:8080
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-container:8761/eureka
+      SPRING_DATASOURCE_URL: jdbc:postgresql://service-db/airline
