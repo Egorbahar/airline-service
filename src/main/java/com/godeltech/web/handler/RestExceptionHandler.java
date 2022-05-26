@@ -1,13 +1,11 @@
 package com.godeltech.web.handler;
 
-import com.godeltech.exception.ResourceNotFoundException;
-import com.godeltech.exception.StatusException;
-import com.godeltech.exception.TokenRefreshException;
-import com.godeltech.exception.WeatherConditionsException;
+import com.godeltech.exception.*;
 import com.godeltech.web.dto.response.ErrorResponseDto;
 import com.godeltech.web.dto.response.ExceptionResponseDto;
 import com.godeltech.web.validator.Violation;
 import lombok.extern.slf4j.Slf4j;
+import org.postgresql.util.PSQLException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,33 +47,40 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(value = WeatherConditionsException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleWeatherConditionsException(WeatherConditionsException exception, WebRequest request) {
-        ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        final ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         log.error(exception.getMessage());
         return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }
 
     @ExceptionHandler(value = StatusException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleStatusException(StatusException exception, WebRequest request) {
-        ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        final ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         log.error(exception.getMessage());
         return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleResourceNotFoundException(ResourceNotFoundException exception, WebRequest request) {
-        ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        final ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         log.error(exception.getMessage());
         return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }
-
+    @ExceptionHandler(value = AssignmentException.class)
+    public ResponseEntity<Object> handleResourceNotFoundException(AssignmentException exception, WebRequest request) {
+        final ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        log.error(exception.getMessage());
+        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
+    }
+    @ExceptionHandler(value = NotUniqueUserException.class)
+    public ResponseEntity<Object> handlePSQLExceptionException(NotUniqueUserException exception, WebRequest request) {
+        final ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        log.error(exception.getMessage());
+        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
+    }
     @ExceptionHandler(value = TokenRefreshException.class)
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleTokenRefreshException(TokenRefreshException exception, WebRequest request) {
-        ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        final ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
         log.error(exception.getMessage());
         return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }

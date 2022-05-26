@@ -8,4 +8,5 @@ public class UserResponseDto {
     private final String username;
     private final String password;
     private final Long roleId;
+    private final String roleName;
 }

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/flight/delete_flights.js"></script>
+    <script type="text/javascript" src="../../js/flight/update_flights.js"></script>
+    <script type="text/javascript" src="../../js/flight/get_flights.js"></script>
+    <script type="text/javascript" src="../../js/sign_out.js"></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en"/>
+    <link rel="stylesheet" type="text/css" href="../../css/flight/flight.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg  static-top">
+    <div class="container">
+        <a class="navbar-brand" style="color: white; size: 16px;">Airline Service</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="navbar-text" id="hello">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../menu.html">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/" onclick="signOut()">Sign out
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div style="width: 450px; margin-left: 900px; margin-top: 50px; margin-bottom: -70px">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="add-flight"
+                onclick="window.location.href = '../flight/add_flight.html'">Add flight
+        </button>
+    </div>
+
+    <div id="div_customer_table">
+        <h1 style="font-family: Open Sans; font-weight: 100; color:#2160b4; margin: 0px">Flights</h1>
+        <div class="row col-md-18 table-responsive">
+            <table id="customerTable" class="table table-striped">
+                <thead>
+                <tr style="background-color:#9bfffc ">
+                    <th id="col1" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#6ab4e1">Id
+                    </th>
+                    <th id="col2" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#6ab4e1">
+                        Departure airport
+                    </th>
+                    <th id="col3" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">
+                        Arrival airport
+                    </th>
+                    <th id="col4" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">
+                        Airplane
+                    </th>
+                    <th id="col5" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">
+                        Captain
+                    </th>
+                    <th id="col6" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">
+                        Second Pilot
+                    </th>
+                    <th id="col7" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">
+                        Stewardess
+                    </th>
+                    <th id="col8" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">
+                        Engineer
+                    </th>
+                    <th id="col9" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">Start
+                        status
+                    </th>
+                    <th id="col10" style="font-family: Open Sans; font-weight: 100; font-size: 18px; color:#1f87c7">
+                        Progress status
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="delete-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            onclick="window.location.href = '../flight/flight.html'">Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger" id="model-delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="update-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            onclick="window.location.href = '../flight/flight.html'">Cancel
+                    </button>
+                    <button type="button" class="btn btn-danger" id="model-update-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6" id="div_updating">
+            <form id="update_customer_form">
+                <div class="form-group">
+                    <label for="id">Id:</label>
+                    <input type="text" class="form-control" id="id" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="departure_row">Departure airport:</label>
+                    <select class="form-control" id="departure_row">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="arrival_row">Arrival airport:</label>
+                    <select class="form-control" id="arrival_row">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="airplane_row">Airplane:</label>
+                    <select class="form-control" id="airplane_row">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="captain_row">Captain:</label>
+                    <select class="form-control" id="captain_row">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="pilot_row">Second Pilot:</label>
+                    <select class="form-control" id="pilot_row">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="stewardess_row">Stewardess:</label>
+                    <select class="form-control" id="stewardess_row">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="engineer_row">Engineer:</label>
+                    <select class="form-control" id="engineer_row">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="start_status_row">Start status:</label>
+                    <select class="form-control" id="start_status_row">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="progress_status_row">Progress status:</label>
+                    <select class="form-control" id="progress_status_row">
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div id="response" style="display:none; margin:10px">
+            </div>
+        </div>
+
+        <div class="col-sm-6" id="div_updating_status">
+            <form id="update_customer_form_status">
+                <div class="form-group">
+                    <label for="id_flight">Id:</label>
+                    <input type="text" class="form-control" id="id_flight" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="start_row">Start status:</label>
+                    <select disabled class="form-control" id="start_row">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="progress_row">Progress status:</label>
+                    <select class="form-control" id="progress_row">
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div id="resp" style="display:none; margin:10px">
+            </div>
+        </div>
+        <div class="col-sm-6" id="div_updating_flight_man">
+            <form id="update_customer_form_flight_man">
+                <div class="form-group">
+                    <label for="id_fl">Id:</label>
+                    <input type="text" class="form-control" id="id_fl" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="departure_row_fl">Departure airport:</label>
+                    <select class="form-control" id="departure_row_fl">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="arrival_row_fl">Arrival airport:</label>
+                    <select class="form-control" id="arrival_row_fl">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="airplane_row_fl">Airplane:</label>
+                    <select class="form-control" id="airplane_row_fl">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="captain_row_fl">Captain:</label>
+                    <select class="form-control" id="captain_row_fl">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="pilot_row_fl">Second Pilot:</label>
+                    <select class="form-control" id="pilot_row_fl">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="stewardess_row_fl">Stewardess:</label>
+                    <select class="form-control" id="stewardess_row_fl">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="engineer_row_fl">Engineer:</label>
+                    <select class="form-control" id="engineer_row_fl">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="start_status_row_fl">Start status:</label>
+                    <select class="form-control" id="start_status_row_fl">
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="progress_status_row_fl">Progress status:</label>
+                    <select disabled class="form-control" id="progress_status_row_fl">
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <div id="respon" style="display:none; margin:10px">
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

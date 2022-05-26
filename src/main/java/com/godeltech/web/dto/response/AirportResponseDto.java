@@ -6,4 +6,6 @@ import lombok.Data;
 public class AirportResponseDto {
     private final Long id;
     private final String code;
+    private String cityName;
+    private Integer visibility;
 }

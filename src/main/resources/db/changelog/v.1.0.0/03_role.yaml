@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2022-05-18--03-role-insert-data
+      author: yahor
+      changes:
+        - insert:
+           tableName: role
+           columns:
+           - column:
+              name: name
+              value: ROLE_ADMIN
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: ROLE_FLIGHT-MANAGER
+        - insert:
+            tableName: role
+            columns:
+              - column:
+                  name: name
+                  value: ROLE_PROGRESS-DISPATCHER

@@ -1,8 +1,11 @@
 package com.godeltech.facade.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.AssignmentException;
 import com.godeltech.facade.StewardessFacade;
 import com.godeltech.mapper.StewardessMapper;
 import com.godeltech.persistence.model.Stewardess;
+import com.godeltech.service.FlightService;
 import com.godeltech.service.StewardessService;
 import com.godeltech.web.dto.request.StewardessRequestDto;
 import com.godeltech.web.dto.response.StewardessResponseDto;
@@ -11,13 +14,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
 public class StewardessFacadeImpl implements StewardessFacade {
+    private final FlightService flightService;
     private final StewardessService stewardessService;
     private final StewardessMapper stewardessMapper;
+
+    private final LocalMessageSource messageSource;
 
     @Override
     public StewardessResponseDto findById(final Long id) {
@@ -38,9 +45,9 @@ public class StewardessFacadeImpl implements StewardessFacade {
     }
 
     @Override
-    public StewardessResponseDto update(final Long id,final StewardessRequestDto stewardessRequestDto) {
+    public StewardessResponseDto update(final Long id, final StewardessRequestDto stewardessRequestDto) {
         log.debug("Update stewardess with id:{}", id);
-        Stewardess stewardess = stewardessService.findById(id);
+        final Stewardess stewardess = stewardessService.findById(id);
         stewardessMapper.updateEntity(stewardess, stewardessRequestDto);
         return stewardessMapper.toStewardessResponseDto(stewardessService.update(stewardess));
     }
@@ -48,6 +55,14 @@ public class StewardessFacadeImpl implements StewardessFacade {
     @Override
     public void deleteById(final Long id) {
         log.debug("Delete stewardess with id:{}", id);
-        stewardessService.deleteById(id);
+        final boolean isAssignedToFlight = flightService.findAll().stream()
+                                                            .map(flight -> flight.getStewardess().getId())
+                                                            .collect(Collectors.toList())
+                                                            .contains(id);
+        if (isAssignedToFlight) {
+            throw new AssignmentException(messageSource.getMessage("error.record.isAssignment", new Object[]{}));
+        } else {
+            stewardessService.deleteById(id);
+        }
     }
 }

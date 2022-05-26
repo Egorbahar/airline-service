@@ -18,7 +18,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/progress/statuses")
+@RequestMapping("/progress-statuses")
 @Slf4j
 public class FlightProgressStatusController {
     private final FlightProgressStatusFacade flightProgressStatusFacade;

@@ -2,7 +2,9 @@ package com.godeltech.facade.impl;
 
 import com.godeltech.facade.UserFacade;
 import com.godeltech.mapper.UserMapper;
+import com.godeltech.persistence.model.Role;
 import com.godeltech.persistence.model.User;
+import com.godeltech.service.RoleService;
 import com.godeltech.service.UserService;
 import com.godeltech.web.dto.request.UserRequestDto;
 import com.godeltech.web.dto.response.UserResponseDto;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserFacadeImpl implements UserFacade {
     private final UserService userService;
+    private final RoleService roleService;
     private final UserMapper userMapper;
 
     @Override
@@ -38,10 +41,11 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public UserResponseDto update(final Long id,final UserRequestDto userRequestDto) {
+    public UserResponseDto update(final Long id, final UserRequestDto userRequestDto) {
         log.debug("Update user with id:{}", id);
-        User user = userService.findById(id);
-        userMapper.updateEntity(user, userRequestDto);
+        final User user = userService.findById(id);
+        final Role role = roleService.findById(userRequestDto.getRoleId());
+        userMapper.updateEntity(user,userRequestDto,role);
         return userMapper.toUserResponseDto(userService.update(user));
     }
 

@@ -11,12 +11,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface FlightProgressStatusMapper {
     @Mapping(target = "id", source = "id")
-//    @Mapping(target = "name", source = "name")
     FlightProgressStatusResponseDto toFlightProgressStatusResponseDto(FlightProgressStatus flightProgressStatus);
 
     @Mapping(target = "id", ignore = true)
-//    @Mapping(target = "name", source = "name")
-//    @Mapping(target = "flyingWindSpeed", source = "flyingWindSpeed")
     FlightProgressStatus toFlightProgressStatus(FlightProgressStatusRequestDto flightProgressStatusRequestDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

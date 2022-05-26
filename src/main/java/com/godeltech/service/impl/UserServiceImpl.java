@@ -1,6 +1,7 @@
 package com.godeltech.service.impl;
 
 import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.NotUniqueUserException;
 import com.godeltech.exception.ResourceNotFoundException;
 import com.godeltech.persistence.model.User;
 import com.godeltech.persistence.repository.RoleRepository;
@@ -40,6 +41,10 @@ public class UserServiceImpl implements UserService {
     public User save(final User user) {
         log.debug("Save new user");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(userRepository.findByUsername(user.getUsername()).isPresent())
+        {
+         throw new NotUniqueUserException(messageSource.getMessage("error.user.notUnique", new Object[]{}));
+        }
         return userRepository.save(user);
     }
 
@@ -54,6 +59,7 @@ public class UserServiceImpl implements UserService {
     public User update(final User user) {
         log.debug("Update user with id:{}", user.getId());
         findById(user.getId());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.saveAndFlush(user);
     }
 

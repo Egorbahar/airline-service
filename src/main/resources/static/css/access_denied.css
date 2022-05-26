@@ -1,0 +1,20 @@
+body { background: url(https://photar.ru/wp-content/uploads/2019/08/cloudscapes-claire-droppert-10_photar.jpg);
+}
+h1, h2 {
+    font-family: Open Sans,serif;
+    width: 210px;
+    font-size: 63px;
+    font-weight: 100;
+    text-decoration: none;
+}
+#forbidden{
+    padding: 20px;
+}
+img {
+    height: 400px;
+    width: 1200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background: none;
+}

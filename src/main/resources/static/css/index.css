@@ -1,0 +1,67 @@
+#feedback {
+    color: red;
+}
+#bth-login{
+    width:150px;
+    height:50px;
+    font-size: 20px;
+}
+button{
+    text-decoration: none;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    /*height: 53px;*/
+    line-height: 3px;
+    color: #000000;
+    font-family: Open Sans, serif;
+    width: 210px;
+    font-size: 23px;
+    font-weight: 100;
+    padding: 20px;
+    background-color: rgba(89, 213, 224, 0.4);
+    border: solid #fcfcfc 1px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    margin: 10px;
+}
+button:hover{
+    background: #5eace0;
+    border: solid #EBFFF6 0;
+    -webkit-border-radius: 31px;
+    -moz-border-radius: 31px;
+    border-radius: 31px;
+    text-decoration: none;
+}
+.header, #username-label, #password-label{
+    -webkit-border-radius: 11px;
+    -moz-border-radius: 11px;
+    border-radius: 11px;
+    /*height: 53px;*/
+    line-height: 3px;
+    color: #050504;
+    font-family: Open Sans;
+    font-weight: 100;
+    text-decoration: none;
+
+}
+#username-label, #password-label{
+    padding: 10px;
+    text-align: center;
+}
+.starter-template{
+    padding: 200px;
+    color: #4ad7dc;
+
+}
+.header{
+    margin: 30px;
+    background: rgba(89, 213, 224, 0.4);
+    background-size: 60px;
+}
+label {
+    background: rgba(89, 212, 234, 0.4);
+}
+body { background: url(http://wallpapers-image.ru/1920x1080/aircraft/wallpapers/aircraft-wallpapers-1920x1080-0008.jpg);
+}

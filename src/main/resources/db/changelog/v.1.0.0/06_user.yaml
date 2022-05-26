@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2022-05-19--06-user-insert-data
+      author: yahor
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: admin
+              - column:
+                  name: password
+                  value: $2a$12$k.KKtkuU.LKpcib.OqOup.a7UcWYCdnI7j7lo8XEOPjAXLEQauDf6
+              - column:
+                  name: role_id
+                  value: "5"

@@ -40,7 +40,7 @@ public class FlightProgressStatusFacadeImpl implements FlightProgressStatusFacad
     @Override
     public FlightProgressStatusResponseDto update(final Long id, final FlightProgressStatusRequestDto flightProgressStatusRequestDto) {
         log.debug("Update progress status with id:{}", id);
-        FlightProgressStatus flightProgressStatus = flightProgressStatusService.findById(id);
+        final FlightProgressStatus flightProgressStatus = flightProgressStatusService.findById(id);
         flightProgressStatusMapper.updateEntity(flightProgressStatus, flightProgressStatusRequestDto);
         return flightProgressStatusMapper.toFlightProgressStatusResponseDto(flightProgressStatusService.update(flightProgressStatus));
     }

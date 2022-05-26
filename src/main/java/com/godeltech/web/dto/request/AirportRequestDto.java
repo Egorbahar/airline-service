@@ -13,4 +13,6 @@ public class AirportRequestDto {
     @NotNull(message = "{airport.visibility.notNull}")
     @Positive(message = "{airport.visibility.positive}")
     private Integer visibility;
+    @NotBlank(message = "{airport.cityName.notBlank}")
+    private String cityName;
 }

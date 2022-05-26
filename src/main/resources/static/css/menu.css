@@ -1,0 +1,79 @@
+#bth-recruiter, #bth-vacancy, #bth-engineer {
+    display: none;
+}
+
+#bth-category,#bth-start-status, #bth-progress-status, #bth-stewardess, #bth-airport, #bth-captain, #bth-engineer, #bth-airplane, #bth-flight, #bth-second-pilot, #bth-user {
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    /*height: 53px;*/
+    line-height: 3px;
+    color: #5eace0;
+    font-family: Open Sans;
+    width: 210px;
+    font-size: 23px;
+    font-weight: 100;
+    padding: 20px;
+    background-color: #EBFFF6;
+    border: solid #1f3bc7 1px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    margin: 10px;
+}
+
+
+#bth-category:hover, #bth-start-status:hover, #bth-progress-status:hover,#bth-stewardess:hover, #bth-airport:hover, #bth-captain:hover, #bth-engineer:hover, #bth-airplane:hover, #bth-flight:hover, #bth-second-pilot:hover, #bth-user:hover {
+    background: #9bfffc;
+    border: solid #EBFFF6 0;
+    -webkit-border-radius: 31px;
+    -moz-border-radius: 31px;
+    border-radius: 31px;
+    text-decoration: none;
+}
+
+.form-group {
+    padding: 30px;
+    margin: 20px;
+}
+
+img {
+    height: 100px;
+    width: 100px;
+    display: table-column;
+    background-color: #EBFFF6;
+    margin: 40px;
+}
+
+button:hover img {
+    background: #F0FF9B;
+}
+
+img:hover {
+    background: #F0FF9B;
+}
+
+.navbar {
+    background-color: #1f87c7;
+}
+
+.nav-item, .nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: #F0FF9B;
+}
+
+img#maker {
+    height: 100px;
+    width: 80px;
+    margin: 40px;
+}
+
+img#courses, img#types {
+    width: 120px;
+    margin-left: 30px;
+}
+body { background: url(https://fullhdoboi.ru/wp-content/uploads/_ph/6/942552018.jpg);
+}

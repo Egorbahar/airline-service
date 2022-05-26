@@ -10,13 +10,9 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface EngineerMapper {
-//    @Mapping(target = "id", source = "id")
-//    @Mapping(target = "name", source = "name")
     EngineerResponseDto toEngineerResponseDto(Engineer engineer);
 
     @Mapping(target = "id", ignore = true)
-//    @Mapping(target = "name", source = "name")
-//    @Mapping(target = "flyingWindSpeed", source = "flyingWindSpeed")
     Engineer toEngineer(EngineerRequestDto engineerRequestDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

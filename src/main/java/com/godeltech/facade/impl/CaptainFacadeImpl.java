@@ -1,9 +1,12 @@
 package com.godeltech.facade.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.AssignmentException;
 import com.godeltech.facade.CaptainFacade;
 import com.godeltech.mapper.CaptainMapper;
 import com.godeltech.persistence.model.Captain;
 import com.godeltech.service.CaptainService;
+import com.godeltech.service.FlightService;
 import com.godeltech.web.dto.request.CaptainRequestDto;
 import com.godeltech.web.dto.response.CaptainResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -11,11 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
 public class CaptainFacadeImpl implements CaptainFacade {
+    private final FlightService flightService;
+    private final LocalMessageSource messageSource;
 
     private final CaptainService captainService;
     private final CaptainMapper captainMapper;
@@ -41,7 +47,7 @@ public class CaptainFacadeImpl implements CaptainFacade {
     @Override
     public CaptainResponseDto update(final Long id,final  CaptainRequestDto captainRequestDto) {
         log.debug("Update captain with id:{}", id);
-        Captain captain = captainService.findById(id);
+        final Captain captain = captainService.findById(id);
         captainMapper.updateEntity(captain, captainRequestDto);
         return captainMapper.toCaptainResponseDto(captainService.update(captain));
     }
@@ -49,6 +55,14 @@ public class CaptainFacadeImpl implements CaptainFacade {
     @Override
     public void deleteById(final Long id) {
         log.debug("Delete captain with id:{}", id);
-        captainService.deleteById(id);
+        final boolean isAssignedToFlight = flightService.findAll().stream()
+                .map(flight -> flight.getCaptain().getId())
+                .collect(Collectors.toList())
+                .contains(id);
+        if (isAssignedToFlight) {
+            throw new AssignmentException(messageSource.getMessage("error.record.isAssignment", new Object[]{}));
+        } else {
+            captainService.deleteById(id);
+        }
     }
 }

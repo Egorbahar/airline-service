@@ -4,7 +4,7 @@ spring:
     username: postgres
     password: root
   profiles:
-    active: dev
+    active: prod
   jpa:
     generate-ddl: false
     properties:
@@ -23,3 +23,7 @@ jwt:
   secret: java_web_token_key
   expirationMin: 10
   refreshExpirationMs : 800000
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVER:http://localhost:8761/eureka}

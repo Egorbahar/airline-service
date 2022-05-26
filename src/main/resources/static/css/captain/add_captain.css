@@ -1,0 +1,38 @@
+label, input:placeholder-shown, select, option{
+    font-family: Open Sans;
+    font-weight: 100;
+    font-size: 18px;
+}
+label{
+    color: #ffffff;
+}
+body { background: url(https://fullhdoboi.ru/wp-content/uploads/_ph/6/942552018.jpg);
+}
+#btn-add-new-captain, #all{
+    background: #9bf7ff;
+    border: solid #05b4ff 0;
+    -webkit-border-radius: 31px;
+    -moz-border-radius: 31px;
+    border-radius: 31px;
+    text-decoration: none;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    /*height: 53px;*/
+    line-height: 3px;
+    color: #ffffff;
+    font-family: Open Sans;
+    width: 210px;
+    font-size: 23px;
+    font-weight: 100;
+    padding: 20px;
+    background-color: #0c6ac7;
+    border: solid #ffffff 1px;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    margin: 10px;
+}
+#btn-add-new-captain:hover, #all:hover{
+    background-color: #07c5ff;
+}
