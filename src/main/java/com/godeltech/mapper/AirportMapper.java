@@ -12,10 +12,14 @@ import java.util.List;
 public interface AirportMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code" , source = "code")
+    @Mapping(target = "cityName", source = "cityName")
+    @Mapping(target = "visibility", source = "visibility")
     AirportResponseDto toAirportResponseDto(Airport airport);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "code" , source = "code")
+    @Mapping(target = "cityName", source = "cityName")
+    @Mapping(target = "visibility", source = "visibility")
     Airport toAirport(AirportRequestDto airportRequestDto);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

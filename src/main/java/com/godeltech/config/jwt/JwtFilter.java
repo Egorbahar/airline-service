@@ -3,7 +3,7 @@ package com.godeltech.config.jwt;
 import com.godeltech.config.CustomUserDetails;
 import com.godeltech.config.CustomUserDetailsService;
 import lombok.AllArgsConstructor;
-import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.util.StringUtils.hasText;
 
 @Component
-@Log
+@Slf4j
 @AllArgsConstructor
 public class JwtFilter extends GenericFilterBean {
     private final JwtProvider jwtProvider;
@@ -28,7 +28,7 @@ public class JwtFilter extends GenericFilterBean {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        logger.info("do filter...");
+        log.info("Do filter...");
         String token = getTokenFromRequest((HttpServletRequest) servletRequest);
         if (token != null && jwtProvider.validateToken(token)) {
             String userName = jwtProvider.getLoginFromToken(token);

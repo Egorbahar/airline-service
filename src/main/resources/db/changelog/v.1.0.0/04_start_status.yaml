@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2022-05-18--04-start-status-insert-data
+      author: yahor
+      changes:
+        - insert:
+            tableName: flight_start_status
+            columns:
+              - column:
+                  name: name
+                  value: Awaiting
+        - insert:
+            tableName: flight_start_status
+            columns:
+              - column:
+                  name: name
+                  value: Confirmed
+        - insert:
+            tableName: flight_start_status
+            columns:
+              - column:
+                  name: name
+                  value: Delayed

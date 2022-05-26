@@ -39,7 +39,7 @@ public class FlightStartStatusFacadeImpl implements FlightStartStatusFacade {
     @Override
     public FlightStartStatusResponseDto update(final Long id,final FlightStartStatusRequestDto flightStartStatusRequestDto) {
         log.debug("Update start status with id:{}", id);
-        FlightStartStatus flightStartStatus = flightStartStatusService.findById(id);
+        final FlightStartStatus flightStartStatus = flightStartStatusService.findById(id);
         flightStartStatusMapper.updateEntity(flightStartStatus, flightStartStatusRequestDto);
         return flightStartStatusMapper.toFlightStartStatusResponseDto(flightStartStatusService.update(flightStartStatus));
     }

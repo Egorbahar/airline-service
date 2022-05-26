@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2022-05-18--05-progress-status-insert-data
+      author: yahor
+      changes:
+        - insert:
+            tableName: flight_progress_status
+            columns:
+              - column:
+                  name: name
+                  value: Scheduled
+        - insert:
+            tableName: flight_progress_status
+            columns:
+              - column:
+                  name: name
+                  value: Delayed
+        - insert:
+            tableName: flight_progress_status
+            columns:
+              - column:
+                  name: name
+                  value: Expected
+        - insert:
+            tableName: flight_progress_status
+            columns:
+              - column:
+                  name: name
+                  value: Landed
+        - insert:
+            tableName: flight_progress_status
+            columns:
+              - column:
+                  name: name
+                  value: Pending

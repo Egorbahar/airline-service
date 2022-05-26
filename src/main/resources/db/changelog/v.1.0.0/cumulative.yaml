@@ -1,5 +1,14 @@
 databaseChangeLog:
+
   - include:
       file: db/changelog/v.1.0.0/01_database_schema.yaml
   - include:
       file: db/changelog/v.1.0.0/02_refreshtoken.yaml
+  - include:
+      file: db/changelog/v.1.0.0/03_role.yaml
+  - include:
+      file: db/changelog/v.1.0.0/04_start_status.yaml
+  - include:
+      file: db/changelog/v.1.0.0/05_progress_status.yaml
+  - include:
+      file: db/changelog/v.1.0.0/06_user.yaml

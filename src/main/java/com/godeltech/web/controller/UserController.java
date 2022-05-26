@@ -1,14 +1,17 @@
 package com.godeltech.web.controller;
 
 import com.godeltech.facade.UserFacade;
+import com.godeltech.persistence.model.User;
 import com.godeltech.web.dto.request.UserRequestDto;
 import com.godeltech.web.dto.response.UserResponseDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.util.encoders.Hex;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

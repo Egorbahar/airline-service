@@ -1,9 +1,12 @@
 package com.godeltech.facade.impl;
 
+import com.godeltech.component.LocalMessageSource;
+import com.godeltech.exception.AssignmentException;
 import com.godeltech.facade.EngineerFacade;
 import com.godeltech.mapper.EngineerMapper;
 import com.godeltech.persistence.model.Engineer;
 import com.godeltech.service.EngineerService;
+import com.godeltech.service.FlightService;
 import com.godeltech.web.dto.request.EngineerRequestDto;
 import com.godeltech.web.dto.response.EngineerResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -11,11 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Slf4j
 @RequiredArgsConstructor
 public class EngineerFacadeImpl implements EngineerFacade {
+    private final FlightService flightService;
+    private final LocalMessageSource messageSource;
     private final EngineerService engineerService;
     private final EngineerMapper engineerMapper;
 
@@ -40,7 +46,7 @@ public class EngineerFacadeImpl implements EngineerFacade {
     @Override
     public EngineerResponseDto update(final Long id, final EngineerRequestDto engineerRequestDto) {
         log.debug("Update engineer with id:{}", id);
-        Engineer engineer = engineerService.findById(id);
+        final Engineer engineer = engineerService.findById(id);
         engineerMapper.updateEntity(engineer, engineerRequestDto);
         return engineerMapper.toEngineerResponseDto(engineerService.update(engineer));
     }
@@ -48,6 +54,15 @@ public class EngineerFacadeImpl implements EngineerFacade {
     @Override
     public void deleteById(final Long id) {
         log.debug("Delete engineer with id:{}", id);
-        engineerService.deleteById(id);
+        final boolean isAssignedToFlight = flightService.findAll().stream()
+                .map(flight -> flight.getCaptain().getId())
+                .collect(Collectors.toList())
+                .contains(id);
+        if (isAssignedToFlight) {
+            throw new AssignmentException(messageSource.getMessage("error.record.isAssignment", new Object[]{}));
+        } else {
+            engineerService.deleteById(id);
+        }
+
     }
 }

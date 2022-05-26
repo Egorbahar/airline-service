@@ -6,20 +6,22 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class FlightRequestDto {
-    @NotNull(message = "The departure airport is required")
+    @NotNull(message = "{flight.depAirport.notNull}")
     private Long departureAirportId;
-    @NotNull(message = "The arrival airport is required")
+    @NotNull(message = "{flight.arrivalAirport.notNull}")
     private Long arrivalAirportId;
-    @NotNull(message = "The airplane is required")
+    @NotNull(message = "flight.airplane.notNull")
     private Long planeId;
-    @NotNull(message = "The captain is required")
+    @NotNull(message = "{flight.captain.notNull}")
     private Long captainId;
-    @NotNull(message = "The second pilot is required")
+    @NotNull(message = "{flight.pilot.notNull}")
     private Long secondPilotId;
-    @NotNull(message = "The stewardess is required")
+    @NotNull(message = "{flight.stewardess.notNull}")
     private Long stewardessId;
-    @NotNull(message = "The engineer is required")
+    @NotNull(message = "{flight.engineer.notNull}")
     private Long engineerId;
+    @NotNull(message = "{flight.progress.notNull}")
     private Long flightProgressStatusId;
+    @NotNull(message = "{flight.start.notNull}")
     private Long flightStartStatusId;
 }

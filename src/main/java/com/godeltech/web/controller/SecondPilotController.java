@@ -18,7 +18,7 @@ import java.util.List;
 @Validated
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/secondpilots")
+@RequestMapping("/second-pilots")
 @Slf4j
 public class SecondPilotController {
     private final SecondPilotFacade secondPilotFacade;
