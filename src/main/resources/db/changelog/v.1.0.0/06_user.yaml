@@ -14,4 +14,4 @@ databaseChangeLog:
                   value: $2a$12$k.KKtkuU.LKpcib.OqOup.a7UcWYCdnI7j7lo8XEOPjAXLEQauDf6
               - column:
                   name: role_id
-                  value: "5"
+                  value: "1"

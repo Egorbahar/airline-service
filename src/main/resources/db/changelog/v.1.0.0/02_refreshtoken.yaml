@@ -24,7 +24,7 @@ databaseChangeLog:
                   name: expiry_date
                   type: timestamp
                   constraints:
-                    rullable: false
+                    nullable: false
               - column:
                   name: user_id
                   type: bigint

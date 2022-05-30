@@ -31,7 +31,6 @@ import javax.validation.Valid;
 public class AuthorizationController {
     private final UserService userService;
     private final JwtProvider jwtProvider;
-    private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/auth")
     public ResponseEntity<AuthorizationResponseDto> auth(@RequestBody @Validated AuthorizationRequestDto authorizationRequestDto) {
@@ -39,21 +38,6 @@ public class AuthorizationController {
         User user = userService.findByUsernameAndPassword(authorizationRequestDto.getUsername(), authorizationRequestDto.getPassword());
         String token = jwtProvider.generateToken(user.getUsername());
         return ResponseEntity.ok(new AuthorizationResponseDto(token, user.getRole().getName(), user.getId()));
-    }
-
-    @PostMapping("/auth/refresh-token")
-    public ResponseEntity<?> refreshToken(@RequestBody @Validated TokenRefreshRequestDto tokenRefreshRequestDto) {
-        String requestRefreshToken = tokenRefreshRequestDto.getRefreshToken();
-
-        return refreshTokenService.findByToken(requestRefreshToken)
-                .map(refreshTokenService::verifyExpiration)
-                .map(RefreshToken::getUser)
-                .map(user -> {
-                    String token = jwtProvider.generateToken(user.getUsername());
-                    return ResponseEntity.ok(new TokenRefreshResponseDto(token, requestRefreshToken));
-                })
-                .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
-                        "Refresh token is not in database!"));
     }
 
     @RequestMapping(value = "/sign-out", method = RequestMethod.GET)
