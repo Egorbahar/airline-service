@@ -1,5 +1,10 @@
+FROM maven:3.6.0-jdk-11-slim AS build
+ADD ./pom.xml pom.xml
+ADD ./src src/
+RUN mvn clean package
+
 FROM adoptopenjdk/openjdk11:alpine-jre
-VOLUME /tmp
-ARG JAR_FILE=target/airline-service-0.0.1-SNAPSHOT.jar
-COPY ${JAR_FILE} airline-service.jar
-ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","/airline-service.jar"]
+ARG JAR_FILE=/target/airline-service-0.0.1-SNAPSHOT.jar
+COPY --from=build ${JAR_FILE} airline-service.jar
+ENTRYPOINT ["java","-jar","/airline-service.jar"]
+
