@@ -33,12 +33,11 @@ public class JwtFilter extends GenericFilterBean {
         if (token != null && jwtProvider.validateToken(token)) {
             String userName = jwtProvider.getLoginFromToken(token);
             CustomUserDetails customUserDetails = customUserDetailsService.loadUserByUsername(userName);
-            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
+            UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(customUserDetails, "", customUserDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
         filterChain.doFilter(servletRequest, servletResponse);
     }
-
     private String getTokenFromRequest(HttpServletRequest request) {
         String bearer = request.getHeader(AUTHORIZATION);
         if (hasText(bearer) && bearer.startsWith("Bearer ")) {

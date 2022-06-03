@@ -11,7 +11,7 @@ $(document).ready(function () {
         $.ajax({
             type: "GET",
             url: "/airports",
-            headers: {'Authorization': "Bearer " + localStorage.getItem("token")},
+            headers: {'Authorization': localStorage.getItem("token")},
             success: function (response) {
                 $.each(response, (i, airport) => {
                     let deleteButton = '<button ' +
