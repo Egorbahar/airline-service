@@ -78,10 +78,4 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         log.error(exception.getMessage());
         return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
     }
-    @ExceptionHandler(value = TokenRefreshException.class)
-    public ResponseEntity<Object> handleTokenRefreshException(TokenRefreshException exception, WebRequest request) {
-        final ExceptionResponseDto errorResponseDto = new ExceptionResponseDto(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
-        log.error(exception.getMessage());
-        return handleExceptionInternal(exception, errorResponseDto, new HttpHeaders(), errorResponseDto.getHttpStatus(), request);
-    }
 }

@@ -27,7 +27,7 @@ $(document).ready(function () {
             data: JSON.stringify(formData),
             dataType : 'json',
             success: function (data) {
-                localStorage.setItem("token", data["token"])
+                localStorage.setItem("token", "Bearer " + data["token"])
                 localStorage.setItem("role", data["role"])
                 localStorage.setItem("userId", data["userId"])
                 localStorage.setItem("username", $("#username").val())
@@ -35,7 +35,7 @@ $(document).ready(function () {
                 window.location.href = "/html/menu.html";
             },
             error: function (e) {
-                $('#feedback').html("Неверный логин или пароль");
+                $('#feedback').html("Wrong login or password");
 
                 console.log("ERROR : ", e);
                 $("#btn-login").prop("disabled", false);
