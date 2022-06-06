@@ -1,15 +1,10 @@
 package com.godeltech.web.controller;
 
 import com.godeltech.config.jwt.JwtProvider;
-import com.godeltech.exception.TokenRefreshException;
-import com.godeltech.persistence.model.RefreshToken;
 import com.godeltech.persistence.model.User;
-import com.godeltech.service.RefreshTokenService;
 import com.godeltech.service.UserService;
 import com.godeltech.web.dto.request.AuthorizationRequestDto;
-import com.godeltech.web.dto.request.TokenRefreshRequestDto;
 import com.godeltech.web.dto.response.AuthorizationResponseDto;
-import com.godeltech.web.dto.response.TokenRefreshResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 @Slf4j
 @Validated

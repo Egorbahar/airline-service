@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull;
 @Data
 public class AirplaneRequestDto {
     @NotBlank(message = "{airplane.name.notBlank}")
-    private String name;
+    private final String name;
     @NotNull(message = "{airplane.wind.notNull}")
-    private Double windSpeed;
+    private final Double windSpeed;
     @NotNull(message = "{airplane.categoryId.notNull}")
-    private Long categoryId;
+    private final Long categoryId;
 }

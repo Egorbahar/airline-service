@@ -22,7 +22,7 @@ management:
 jwt:
   secret: java_web_token_key
   expirationMin: 10
-  refreshExpirationMs : 800000
+
 eureka:
   client:
     serviceUrl:
