@@ -1,7 +1,6 @@
 $(document).ready(function () {
     if (localStorage.getItem("role") === "ROLE_ADMIN" || localStorage.getItem("role") === "ROLE_FLIGHT-MANAGER") {
         $("#add-category").show();
-        console.log(localStorage.getItem("token"));
     } else {
         window.location.href = "/accessDenied.html";
     }

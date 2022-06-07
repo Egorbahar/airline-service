@@ -32,7 +32,7 @@ $(document).ready(function () {
     });
 
     $(document).on("click", "#div_customer_table table button.btn_id", function () {
-        if (localStorage.getItem("role") === "ROLE_ADMIN") {
+        if (localStorage.getItem("role") === "ROLE_ADMIN" || localStorage.getItem("role") === "ROLE_FLIGHT-MANAGER") {
             let id_of_button = (event.srcElement.id);
             let id = id_of_button.split("_")[2];
             $.ajax({

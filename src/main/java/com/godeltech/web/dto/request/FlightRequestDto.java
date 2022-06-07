@@ -10,7 +10,7 @@ public class FlightRequestDto {
     private Long departureAirportId;
     @NotNull(message = "{flight.arrivalAirport.notNull}")
     private Long arrivalAirportId;
-    @NotNull(message = "flight.airplane.notNull")
+    @NotNull(message = "{flight.airplane.notNull}")
     private Long planeId;
     @NotNull(message = "{flight.captain.notNull}")
     private Long captainId;

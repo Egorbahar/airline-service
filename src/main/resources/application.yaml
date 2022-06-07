@@ -4,7 +4,7 @@ spring:
     username: postgres
     password: root
   profiles:
-    active: prod
+    active: dev
   jpa:
     generate-ddl: false
     properties:
